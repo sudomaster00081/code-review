@@ -27,6 +27,6 @@ export const appConfig: ApplicationConfig = {
         reducer: claimReducer
     }),
     provideStoreDevtools({ maxAge: 25, logOnly: false, }),
-    provideRouterStore()
+    provideRouterStore(), provideAnimationsAsync()
   ]
 };

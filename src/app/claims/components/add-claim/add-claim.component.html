@@ -1,6 +1,6 @@
-<!-- edit-claim-modal.component.html -->
+<!-- add-claim-modal.component.html -->
 <div class="modal">
-    <h2>Edit Claim</h2>
+    <h2>Add New Claim</h2>
     <form>
       <label>Patient Name:</label>
       <input [(ngModel)]="claim.patientName" name="patientName" />
@@ -24,8 +24,8 @@
       <label>Assigned To:</label>
       <input [(ngModel)]="claim.assignedTo" name="assignedTo" />
   
-      <button type="button" (click)="saveChanges()">Save</button>
-      <button type="button" (click)="closeModal()">Close</button>
+      <button type="button" (click)="saveClaim()">Add Claim</button>
+      <button type="button" (click)="closeModal()">Cancel</button>
     </form>
   </div>
   

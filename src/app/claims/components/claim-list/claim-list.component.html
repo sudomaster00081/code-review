@@ -1,8 +1,14 @@
-<p>claim-list works!</p>
 <!-- claim-list.component.html -->
+ <!-- claim-list.component.html -->
+<div>
+    <h2>Claims List</h2>
+    
+    <!-- Add New Claim Button -->
+    <button (click)="openAddClaimModal()">Add New Claim</button>
+  </div>
+  
 <div>
     <input [(ngModel)]="filterValue" (input)="filterClaims()" placeholder="Filter claims...">
-    <button (click)="addClaim()">Add Claim</button>
   </div>
   
   <div *ngIf="(loading$ | async)">
