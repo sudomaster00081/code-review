@@ -19,14 +19,5 @@
     </li>
   </ul>
 
-  <!-- Example in claim-list.component.html -->
-<div *ngFor="let claim of claims$ | async">
-    <h3>{{ claim.patientName }}</h3>
-    <p>{{ claim.description }}</p>
-    <p>{{ claim.claimDate | date }}</p>
-    <p>{{ claim.amount | currency }}</p>
-    <p>Status: {{ claim.status }}</p>
-    <p>Assigned To: {{ claim.assignedTo }}</p>
-  </div>
   
   

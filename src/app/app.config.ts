@@ -23,7 +23,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideEffects(ClaimEffects),
     provideState({
-        name: 'claim',
+        name: 'claims',
         reducer: claimReducer
     }),
     provideStoreDevtools({ maxAge: 25, logOnly: false, }),
