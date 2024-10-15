@@ -1,0 +1,32 @@
+<p>claim-list works!</p>
+<!-- claim-list.component.html -->
+<div>
+    <input [(ngModel)]="filterValue" (input)="filterClaims()" placeholder="Filter claims...">
+    <button (click)="addClaim()">Add Claim</button>
+  </div>
+  
+  <div *ngIf="(loading$ | async)">
+    Loading claims...
+  </div>
+  <div *ngIf="(error$ | async) as error">
+    Error: {{ error }}
+  </div>
+  <ul *ngIf="!(loading$ | async) && !(error$ | async)">
+    <li *ngFor="let claim of claims$ | async">
+      <span>{{ claim.patientName }} - {{ claim.description }} - {{ claim.claimDate | date }} - ${{ claim.amount }} - {{ claim.status }} - Assigned to: {{ claim.assignedTo }}</span>
+      <button (click)="updateClaim(claim)">Edit</button>
+      <button (click)="deleteClaim(claim.id)">Delete</button>
+    </li>
+  </ul>
+
+  <!-- Example in claim-list.component.html -->
+<div *ngFor="let claim of claims$ | async">
+    <h3>{{ claim.patientName }}</h3>
+    <p>{{ claim.description }}</p>
+    <p>{{ claim.claimDate | date }}</p>
+    <p>{{ claim.amount | currency }}</p>
+    <p>Status: {{ claim.status }}</p>
+    <p>Assigned To: {{ claim.assignedTo }}</p>
+  </div>
+  
+  

@@ -1,0 +1,30 @@
+<p>edit-claim works!</p>
+<!-- edit-claim-modal.component.html -->
+<div class="modal">
+    <h2>Edit Claim</h2>
+    <label>Patient Name:</label>
+    <input [(ngModel)]="claim.patientName" />
+    
+    <label>Description:</label>
+    <input [(ngModel)]="claim.description" />
+    
+    <label>Claim Date:</label>
+    <input type="date" [(ngModel)]="claim.claimDate" />
+    
+    <label>Amount:</label>
+    <input type="number" [(ngModel)]="claim.amount" />
+    
+    <label>Status:</label>
+    <select [(ngModel)]="claim.status">
+      <option value="Pending">Pending</option>
+      <option value="Approved">Approved</option>
+      <option value="Denied">Denied</option>
+    </select>
+    
+    <label>Assigned To:</label>
+    <input [(ngModel)]="claim.assignedTo" />
+    
+    <button (click)="saveChanges(claim)">Save</button>
+    <button (click)="closeModal()">Close</button>
+  </div>
+  
