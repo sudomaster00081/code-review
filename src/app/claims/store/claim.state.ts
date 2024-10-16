@@ -1,15 +1,9 @@
 // src/app/claims/store/claim.state.ts
 import { Claim } from '../models/claim.model';
 
-// export interface ClaimState {
-//   claims: Claim[]; // All claims
-//   filteredClaims: Claim[]; // Claims after filtering
-//   loading: boolean; // Loading state
-//   error: string | null; // Error state
-// }
 
 export interface ClaimState {
-    filters: { patientName: any; status: any; claimDateFrom: any; claimDateTo: any; minAmount: any; maxAmount: any; };
+    filters: { patientName: any; status: any; claimDateFrom: any; claimDateTo: any; minAmount: any; maxAmount: any; visitType:any; encId: any; department: any; };
     claims: Claim[]; // or whatever type you expect
     filteredClaims: any[];
     loading: boolean;
@@ -29,5 +23,8 @@ export const initialState: ClaimState = {
     claimDateTo: null,
     minAmount: null,
     maxAmount: null,
+    visitType: null,
+    encId: null,
+    department:null
   },
 };

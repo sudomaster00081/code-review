@@ -16,13 +16,28 @@ import { applyFilters } from '../../store/actions/claim.actions';
 })
 export class FilterClaimComponent {
   filter = {
+    encId: null,
     patientName: '',
     status: '',
     claimDateFrom: null,
     claimDateTo: null,
     minAmount: null,
     maxAmount: null,
+    visitType: null,
+    department: null
   };
+  departments = [
+    'Emergency Medicine',
+    'Endocrinology',
+    'General Practice',
+    'Surgery',
+    'Preventive Care',
+    'Physical Therapy',
+    'Laboratory',
+    'Radiology',
+    'Allergy and Immunology'
+  ];
+  
 
   constructor(private store: Store) {}
 
@@ -31,6 +46,7 @@ export class FilterClaimComponent {
   }
 
   applyFilters() {
+    // console.log('Applying filters:', this.filter);
     this.store.dispatch(applyFilters({ filter: this.filter }));
   }
 

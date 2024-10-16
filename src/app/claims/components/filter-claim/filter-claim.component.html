@@ -1,5 +1,6 @@
 <h2>Filter Claims</h2>
-  <form #filterForm="ngForm" class="filter-form">
+<form #filterForm="ngForm" class="filter-form">
+  <div class="form-row">
     <div class="form-group">
       <label>Patient Name:</label>
       <input 
@@ -45,26 +46,73 @@
     </div>
 
     <div class="form-group">
-      <label>Minimum Amount:</label>
+      <label>Min Amount:</label>
       <input 
         type="number" 
         [ngModel]="filter.minAmount" 
         (ngModelChange)="updateFilter('minAmount', $event)" 
         name="minAmount" 
-        placeholder="Minimum amount"
+        placeholder="Min amount"
       />
     </div>
 
     <div class="form-group">
-      <label>Maximum Amount:</label>
+      <label>Max Amount:</label>
       <input 
         type="number" 
         [ngModel]="filter.maxAmount" 
         (ngModelChange)="updateFilter('maxAmount', $event)" 
         name="maxAmount" 
-        placeholder="Maximum amount"
+        placeholder="Max amount"
       />
     </div>
+    <div class="form-group">
+  <label>Visit Type</label>
+  <div class="radio-group">
+    <div>
+      <input 
+        type="radio" 
+        [ngModel]="filter.visitType" 
+        (ngModelChange)="updateFilter('visitType', 'IP')" 
+        name="visitType" 
+        id="visitTypeIP" 
+        value="IP"
+      />
+      <label for="visitTypeIP">IP</label>
+    </div>
+    <div>
+      <input 
+        type="radio" 
+        [ngModel]="filter.visitType" 
+        (ngModelChange)="updateFilter('visitType', 'OP')" 
+        name="visitType" 
+        id="visitTypeOP" 
+        value="OP"
+      />
+      <label for="visitTypeOP">OP</label>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <label>Department :</label>
+  <select [ngModel]="filter.department" 
+  (ngModelChange)="updateFilter('department', $event)" 
+  name="department">
+    <option *ngFor="let department of departments" [value]="department">{{ department }}</option>
+</select>
 
-    <button type="button" class="apply-filter-btn" (click)="applyFilters()">Apply Filters</button>
-  </form>
+</div>
+
+<div class="form-group">
+  <label>Encounter Id :</label>
+  <input type="number" [ngModel]="filter.encId" 
+  (ngModelChange)="updateFilter('encId', $event)" 
+  name="encId">
+</div>
+
+
+
+  </div>
+
+  <button type="button" class="apply-filter-btn" (click)="applyFilters()">Apply Filters</button>
+</form>

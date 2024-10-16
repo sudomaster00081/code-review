@@ -1,0 +1,19 @@
+.app-container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    height: 100vh; /* Full viewport height */
+}
+
+.app-filter {
+    flex: 0 0 auto; /* Fixed size for the filter */
+    /* Optional styles for aesthetics */
+    background-color: #f0f0f0;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.app-list {
+    flex: 1; /* Takes remaining space */
+    overflow-y: auto; /* Scrollable if content overflows */
+    padding: 10px;
+}

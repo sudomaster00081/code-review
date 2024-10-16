@@ -9,10 +9,6 @@ export const selectClaims = createSelector(
   (state: ClaimState) => state.claims
 );
 
-// export const selectFilteredClaims = createSelector(
-//   selectClaimState,
-//   (state: ClaimState) => state.filteredClaims
-// );
 
 export const selectLoading = createSelector(
   selectClaimState,
@@ -27,7 +23,7 @@ export const selectError = createSelector(
 export const selectFilteredClaims = createSelector(
   selectClaimState,
   (state: ClaimState) => {
-    const { patientName, status, claimDateFrom, claimDateTo, minAmount, maxAmount } = state.filters;
+    const { patientName, status, claimDateFrom, claimDateTo, minAmount, maxAmount, visitType, encId, department} = state.filters;
 
     return state.claims.filter(claim => {
       // Apply filters for each field
@@ -37,8 +33,11 @@ export const selectFilteredClaims = createSelector(
       const matchesDateTo = claimDateTo ? new Date(claim.claimDate) <= new Date(claimDateTo) : true;
       const matchesMinAmount = minAmount ? claim.amount >= minAmount : true;
       const matchesMaxAmount = maxAmount ? claim.amount <= maxAmount : true;
+      const matchesVisitType = visitType ? claim.visitType === visitType : true;
+      const matchesEncId = encId ? claim.encId === encId : true;
+      const matchesDepartment = department ? claim.department === department : true;
 
-      return matchesPatientName && matchesStatus && matchesDateFrom && matchesDateTo && matchesMinAmount && matchesMaxAmount;
+      return matchesPatientName && matchesStatus && matchesDateFrom && matchesDateTo && matchesMinAmount && matchesMaxAmount && matchesVisitType && matchesEncId && matchesDepartment;
     });
   }
 );

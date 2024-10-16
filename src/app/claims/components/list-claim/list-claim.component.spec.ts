@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ClaimListComponent } from './claim-list.component';
+import { ClaimListComponent } from './list-claim.component';
 
 describe('ClaimListComponent', () => {
   let component: ClaimListComponent;

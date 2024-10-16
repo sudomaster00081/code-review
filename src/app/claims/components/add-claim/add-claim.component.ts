@@ -14,13 +14,25 @@ import { FormsModule } from '@angular/forms';
 export class AddClaimModalComponent {
   // Initialize a new claim object
   claim: Claim = {
-    id: 1, // ID will be auto-generated
-    patientName: '',
-    description: '',
-    claimDate: '',
-    amount: 0,
-    status: 'Pending',
-    assignedTo: ''
+    encId: 1,
+    id: 1, // Unique identifier
+    patientName: "", // Name of the patient
+    description: "", // Description of the claim
+    claimDate: '', // Date of the claim
+    amount: 0, // Amount claimed
+    status: 'Pending', // Status of the claim
+    assignedTo: '', // The staff assigned to the claim
+    clinic: '',
+    tpaIns: '',
+    plan: '',
+    clinicianId: '',
+    mrNo: '',
+    visitStart: '',
+    visitEnd: '',
+    payerCode: '',
+    visitType: 'IP',
+    department: '',
+
   };
 
   constructor(public dialogRef: MatDialogRef<AddClaimModalComponent>) {}

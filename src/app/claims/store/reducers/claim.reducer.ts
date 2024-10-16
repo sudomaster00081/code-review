@@ -12,8 +12,7 @@ import {
   deleteClaimFailure,
   addClaim,
   addClaimSuccess,
-  addClaimFailure,
-  filterClaims, applyFilters } from '../actions/claim.actions'
+  addClaimFailure, applyFilters } from '../actions/claim.actions'
 import { Claim } from '../../models/claim.model';
 
 export interface ClaimState {
@@ -84,18 +83,6 @@ export const claimReducer = createReducer(
     };
   }),
   on(addClaimFailure, (state, { error }) => ({ ...state, loading: false, error })),
-  on(filterClaims, (state, { filter }) => {
-    const filtered = state.claims.filter(claim => 
-      claim.patientName.includes(filter) || 
-      claim.description.includes(filter) ||
-      claim.assignedTo.includes(filter) ||
-      claim.status.includes(filter)
-    );
-    return {
-      ...state,
-      filteredClaims: filtered,
-    };
-  }),
 
    // Handle applying filters
    on(applyFilters, (state, { filter }) => ({

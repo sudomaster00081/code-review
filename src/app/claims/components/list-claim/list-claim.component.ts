@@ -10,8 +10,6 @@ import {
   updateClaim,
   deleteClaim,
   addClaim,
-  filterClaims,
-  applyFilters,
 } from '../../store/actions/claim.actions';
 import {
   selectFilteredClaims,
@@ -33,15 +31,6 @@ export class ListClaimComponent implements OnInit {
   claims$: Observable<Claim[]>;
   loading$: Observable<boolean>;
   error$: Observable<string | null>;
-  filterValue: string = '';
-  filter = {
-    patientName: '',
-    status: '',
-    claimDateFrom: null,
-    claimDateTo: null,
-    minAmount: null,
-    maxAmount: null,
-  };
 
   constructor(private store: Store, private dialog: MatDialog) {
     this.claims$ = this.store.select(selectFilteredClaims);
@@ -69,19 +58,6 @@ export class ListClaimComponent implements OnInit {
     this.store.dispatch(deleteClaim({ claimId }));
   }
 
-  // addClaim() {
-  //   const newClaim: Claim = {
-  //     id: Date.now(), // Simple ID generation for the example
-  //     patientName: 'New Patient',
-  //     description: 'Description of the new claim',
-  //     claimDate: new Date().toISOString(),
-  //     amount: 1000,
-  //     status: 'Pending',
-  //     assignedTo: 'John Doe'
-  //   };
-  //   this.store.dispatch(addClaim({ claim: newClaim }));
-  // }
-
   openAddClaimModal() {
     const dialogRef = this.dialog.open(AddClaimModalComponent, {
       width: '400px',
@@ -94,13 +70,5 @@ export class ListClaimComponent implements OnInit {
       }
     });
   }
-    
-  filterClaims() {
-    this.store.dispatch(filterClaims({ filter: this.filterValue }));
-  }
-
-  
-
-  
   
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FilterClaimComponent } from "../filter-claim/filter-claim.component";
-import { ListClaimComponent } from "../list-claim/claim-list.component";
+import { ListClaimComponent } from "../list-claim/list-claim.component";
 
 @Component({
   selector: 'app-dashboard',
