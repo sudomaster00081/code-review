@@ -1,0 +1,114 @@
+.claim-list-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .add-claim-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .add-claim-btn:hover {
+    background-color: #45a049;
+  }
+  
+  h2 {
+    margin-bottom: 10px;
+  }
+  
+  .filter-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  input, select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+  }
+  
+  .apply-filter-btn {
+    grid-column: span 2;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .apply-filter-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .loading, .error {
+    text-align: center;
+    margin-top: 20px;
+    color: #ff3333;
+  }
+  
+  .claim-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .claim-item {
+    padding: 15px;
+    margin: 10px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .edit-btn, .delete-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .edit-btn {
+    background-color: #FFEB3B;
+  }
+  
+  .edit-btn:hover {
+    background-color: #FDD835;
+  }
+  
+  .delete-btn {
+    background-color: #F44336;
+    color: white;
+  }
+  
+  .delete-btn:hover {
+    background-color: #D32F2F;
+  }
+  

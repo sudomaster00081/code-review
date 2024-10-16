@@ -1,31 +1,66 @@
 <!-- add-claim-modal.component.html -->
+<div class="modal-overlay" (click)="closeModal()"></div>
 <div class="modal">
-    <h2>Add New Claim</h2>
-    <form>
+  <h2>Add New Claim</h2>
+  <form class="add-claim-form">
+    <div class="form-group">
       <label>Patient Name:</label>
-      <input [(ngModel)]="claim.patientName" name="patientName" />
-  
+      <input 
+        [(ngModel)]="claim.patientName" 
+        name="patientName" 
+        placeholder="Enter patient name"
+      />
+    </div>
+
+    <div class="form-group">
       <label>Description:</label>
-      <input [(ngModel)]="claim.description" name="description" />
-  
+      <input 
+        [(ngModel)]="claim.description" 
+        name="description" 
+        placeholder="Enter claim description"
+      />
+    </div>
+
+    <div class="form-group">
       <label>Claim Date:</label>
-      <input type="date" [(ngModel)]="claim.claimDate" name="claimDate" />
-  
+      <input 
+        type="date" 
+        [(ngModel)]="claim.claimDate" 
+        name="claimDate" 
+      />
+    </div>
+
+    <div class="form-group">
       <label>Amount:</label>
-      <input type="number" [(ngModel)]="claim.amount" name="amount" />
-  
+      <input 
+        type="number" 
+        [(ngModel)]="claim.amount" 
+        name="amount" 
+        placeholder="Enter claim amount"
+      />
+    </div>
+
+    <div class="form-group">
       <label>Status:</label>
       <select [(ngModel)]="claim.status" name="status">
         <option value="Pending">Pending</option>
         <option value="Approved">Approved</option>
         <option value="Denied">Denied</option>
       </select>
-  
+    </div>
+
+    <div class="form-group">
       <label>Assigned To:</label>
-      <input [(ngModel)]="claim.assignedTo" name="assignedTo" />
-  
-      <button type="button" (click)="saveClaim()">Add Claim</button>
-      <button type="button" (click)="closeModal()">Cancel</button>
-    </form>
-  </div>
-  
+      <input 
+        [(ngModel)]="claim.assignedTo" 
+        name="assignedTo" 
+        placeholder="Enter assignee"
+      />
+    </div>
+
+    <div class="form-buttons">
+      <button type="button" class="save-btn" (click)="saveClaim()">Add Claim</button>
+      <button type="button" class="cancel-btn" (click)="closeModal()">Cancel</button>
+    </div>
+  </form>
+</div>

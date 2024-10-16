@@ -1,81 +1,100 @@
 <!-- claim-list.component.html -->
- <!-- claim-list.component.html -->
-<div>
+<div class="claim-list-container">
+  <div class="header">
     <h2>Claims List</h2>
-    
-    <!-- Add New Claim Button -->
-    <button (click)="openAddClaimModal()">Add New Claim</button>
+    <button class="add-claim-btn" (click)="openAddClaimModal()">Add New Claim</button>
   </div>
   
   <h2>Filter Claims</h2>
-  <form #filterForm="ngForm">
-    <label>Patient Name:</label>
-    <input 
-      type="text" 
-      [ngModel]="filter.patientName" 
-      (ngModelChange)="updateFilter('patientName', $event)" 
-      name="patientName" 
-    />
+  <form #filterForm="ngForm" class="filter-form">
+    <div class="form-group">
+      <label>Patient Name:</label>
+      <input 
+        type="text" 
+        [ngModel]="filter.patientName" 
+        (ngModelChange)="updateFilter('patientName', $event)" 
+        name="patientName" 
+        placeholder="Enter patient name"
+      />
+    </div>
 
-    <label>Status:</label>
-    <select 
-      [ngModel]="filter.status" 
-      (ngModelChange)="updateFilter('status', $event)" 
-      name="status">
-      <option value="">All</option>
-      <option value="Pending">Pending</option>
-      <option value="Approved">Approved</option>
-      <option value="Denied">Denied</option>
-    </select>
+    <div class="form-group">
+      <label>Status:</label>
+      <select 
+        [ngModel]="filter.status" 
+        (ngModelChange)="updateFilter('status', $event)" 
+        name="status">
+        <option value="">All</option>
+        <option value="Pending">Pending</option>
+        <option value="Approved">Approved</option>
+        <option value="Denied">Denied</option>
+      </select>
+    </div>
 
-    <label>Claim Date (From):</label>
-    <input 
-      type="date" 
-      [ngModel]="filter.claimDateFrom" 
-      (ngModelChange)="updateFilter('claimDateFrom', $event)" 
-      name="claimDateFrom" 
-    />
+    <div class="form-group">
+      <label>Claim Date (From):</label>
+      <input 
+        type="date" 
+        [ngModel]="filter.claimDateFrom" 
+        (ngModelChange)="updateFilter('claimDateFrom', $event)" 
+        name="claimDateFrom" 
+      />
+    </div>
 
-    <label>Claim Date (To):</label>
-    <input 
-      type="date" 
-      [ngModel]="filter.claimDateTo" 
-      (ngModelChange)="updateFilter('claimDateTo', $event)" 
-      name="claimDateTo" 
-    />
+    <div class="form-group">
+      <label>Claim Date (To):</label>
+      <input 
+        type="date" 
+        [ngModel]="filter.claimDateTo" 
+        (ngModelChange)="updateFilter('claimDateTo', $event)" 
+        name="claimDateTo" 
+      />
+    </div>
 
-    <label>Minimum Amount:</label>
-    <input 
-      type="number" 
-      [ngModel]="filter.minAmount" 
-      (ngModelChange)="updateFilter('minAmount', $event)" 
-      name="minAmount" 
-    />
+    <div class="form-group">
+      <label>Minimum Amount:</label>
+      <input 
+        type="number" 
+        [ngModel]="filter.minAmount" 
+        (ngModelChange)="updateFilter('minAmount', $event)" 
+        name="minAmount" 
+        placeholder="Minimum amount"
+      />
+    </div>
 
-    <label>Maximum Amount:</label>
-    <input 
-      type="number" 
-      [ngModel]="filter.maxAmount" 
-      (ngModelChange)="updateFilter('maxAmount', $event)" 
-      name="maxAmount" 
-    />
+    <div class="form-group">
+      <label>Maximum Amount:</label>
+      <input 
+        type="number" 
+        [ngModel]="filter.maxAmount" 
+        (ngModelChange)="updateFilter('maxAmount', $event)" 
+        name="maxAmount" 
+        placeholder="Maximum amount"
+      />
+    </div>
 
-    <button type="button" (click)="applyFilters()">Go</button>
+    <button type="button" class="apply-filter-btn" (click)="applyFilters()">Apply Filters</button>
   </form>
   
-  <div *ngIf="(loading$ | async)">
+  <div *ngIf="(loading$ | async)" class="loading">
     Loading claims...
   </div>
-  <div *ngIf="(error$ | async) as error">
+  
+  <div *ngIf="(error$ | async) as error" class="error">
     Error: {{ error }}
   </div>
-  <ul *ngIf="!(loading$ | async) && !(error$ | async)">
-    <li *ngFor="let claim of claims$ | async">
-      <span>{{ claim.patientName }} - {{ claim.description }} - {{ claim.claimDate | date }} - ${{ claim.amount }} - {{ claim.status }} - Assigned to: {{ claim.assignedTo }}</span>
-      <button (click)="updateClaim(claim)">Edit</button>
-      <button (click)="deleteClaim(claim.id)">Delete</button>
+  
+  <ul *ngIf="!(loading$ | async) && !(error$ | async)" class="claim-list">
+    <li *ngFor="let claim of claims$ | async" class="claim-item">
+      <span>
+        {{ claim.patientName }} - {{ claim.description }} - 
+        {{ claim.claimDate | date }} - ${{ claim.amount }} - 
+        {{ claim.status }} - Assigned to: {{ claim.assignedTo }}
+      </span>
+      <div class="action-buttons">
+        <button class="edit-btn" (click)="updateClaim(claim)">Edit</button>
+        <button class="delete-btn" (click)="deleteClaim(claim.id)">Delete</button>
+      </div>
     </li>
   </ul>
-
-  
-  
+</div>
