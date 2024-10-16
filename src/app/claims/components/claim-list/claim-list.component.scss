@@ -112,3 +112,72 @@
     background-color: #D32F2F;
   }
   
+
+  .claim-table {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  
+  .claim-header {
+    display: table-row;
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .claim-row {
+    display: table-row;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .claim-header span, 
+  .claim-row span {
+    display: table-cell;
+    padding: 10px 15px;
+    border-right: 1px solid #ddd;
+  }
+  
+  .claim-header span:last-child, 
+  .claim-row span:last-child {
+    border-right: none;
+  }
+  
+  .action-buttons {
+    display: table-cell;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .edit-btn, .delete-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .edit-btn {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .edit-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .delete-btn {
+    background-color: #F44336;
+    color: white;
+  }
+  
+  .delete-btn:hover {
+    background-color: #D32F2F;
+  }
+  
+  .claim-row:hover {
+    background-color: #f9f9f9;
+  }
+  
