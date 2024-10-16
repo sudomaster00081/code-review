@@ -10,7 +10,7 @@ import { Claim } from '../models/claim.model';
 
 export interface ClaimState {
     filters: { patientName: any; status: any; claimDateFrom: any; claimDateTo: any; minAmount: any; maxAmount: any; };
-    claims: any[]; // or whatever type you expect
+    claims: Claim[]; // or whatever type you expect
     filteredClaims: any[];
     loading: boolean;
     error: string | null;
