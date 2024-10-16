@@ -23,13 +23,13 @@ import { FormsModule } from '@angular/forms';
 import { AddClaimModalComponent } from '../add-claim/add-claim.component';
 
 @Component({
-  selector: 'app-claim-list',
+  selector: 'app-list-claim',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './claim-list.component.html',
-  styleUrl: './claim-list.component.scss'
+  templateUrl: './list-claim.component.html',
+  styleUrl: './list-claim.component.scss'
 })
-export class ClaimListComponent implements OnInit {
+export class ListClaimComponent implements OnInit {
   claims$: Observable<Claim[]>;
   loading$: Observable<boolean>;
   error$: Observable<string | null>;
@@ -99,12 +99,8 @@ export class ClaimListComponent implements OnInit {
     this.store.dispatch(filterClaims({ filter: this.filterValue }));
   }
 
-  applyFilters() {
-    this.store.dispatch(applyFilters({ filter: this.filter }));
-  }
+  
 
-  updateFilter(field: string, value: any) {
-    this.filter = { ...this.filter, [field]: value };
-  }
+  
   
 }

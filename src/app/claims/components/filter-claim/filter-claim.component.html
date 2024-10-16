@@ -1,11 +1,4 @@
-<!-- claim-list.component.html -->
-<div class="claim-list-container">
-  <div class="header">
-    <h2>Claims List</h2>
-    <button class="add-claim-btn" (click)="openAddClaimModal()">Add New Claim</button>
-  </div>
-  
-  <h2>Filter Claims</h2>
+<h2>Filter Claims</h2>
   <form #filterForm="ngForm" class="filter-form">
     <div class="form-group">
       <label>Patient Name:</label>
@@ -75,37 +68,3 @@
 
     <button type="button" class="apply-filter-btn" (click)="applyFilters()">Apply Filters</button>
   </form>
-  
-  <div *ngIf="(loading$ | async)" class="loading">
-    Loading claims...
-  </div>
-  
-  <div *ngIf="(error$ | async) as error" class="error">
-    Error: {{ error }}
-  </div>
-  
-  <ul *ngIf="!(loading$ | async) && !(error$ | async)" class="claim-table">
-    <li class="claim-header">
-      <span>Patient Name</span>
-      <span>Description</span>
-      <span>Claim Date</span>
-      <span>Amount</span>
-      <span>Status</span>
-      <span>Assigned To</span>
-      <span>Actions</span>
-    </li>
-    <li *ngFor="let claim of claims$ | async" class="claim-row">
-      <span>{{ claim.patientName }}</span>
-      <span>{{ claim.description }}</span>
-      <span>{{ claim.claimDate | date }}</span>
-      <span>${{ claim.amount }}</span>
-      <span>{{ claim.status }}</span>
-      <span>{{ claim.assignedTo }}</span>
-      <div class="action-buttons">
-        <button class="edit-btn" (click)="updateClaim(claim)">Edit</button>
-        <button class="delete-btn" (click)="deleteClaim(claim.id)">Delete</button>
-      </div>
-    </li>
-  </ul>
-  
-</div>
