@@ -9,6 +9,7 @@ import { Claim } from '../models/claim.model';
 // }
 
 export interface ClaimState {
+    filters: { patientName: any; status: any; claimDateFrom: any; claimDateTo: any; minAmount: any; maxAmount: any; };
     claims: any[]; // or whatever type you expect
     filteredClaims: any[];
     loading: boolean;
@@ -21,4 +22,12 @@ export const initialState: ClaimState = {
   filteredClaims: [],
   loading: false,
   error: null,
+  filters: {
+    patientName: '',
+    status: '',
+    claimDateFrom: null,
+    claimDateTo: null,
+    minAmount: null,
+    maxAmount: null,
+  },
 };

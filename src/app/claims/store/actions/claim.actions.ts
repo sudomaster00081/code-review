@@ -63,3 +63,8 @@ export const filterClaims = createAction(
   '[Claims] Filter Claims',
   props<{ filter: string }>() // Filter string
 );
+
+export const applyFilters = createAction(
+  '[Claims] Apply Filters',
+  props<{ filter: any }>() // Filter object contains the filtering fields
+);

@@ -10,12 +10,13 @@ import {
   updateClaim,
   deleteClaim,
   addClaim,
-  filterClaims
+  filterClaims,
+  applyFilters,
 } from '../../store/actions/claim.actions';
 import {
   selectFilteredClaims,
   selectLoading,
-  selectError
+  selectError,
 } from '../../store/selectors/claim.selectors';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -33,6 +34,14 @@ export class ClaimListComponent implements OnInit {
   loading$: Observable<boolean>;
   error$: Observable<string | null>;
   filterValue: string = '';
+  filter = {
+    patientName: '',
+    status: '',
+    claimDateFrom: null,
+    claimDateTo: null,
+    minAmount: null,
+    maxAmount: null,
+  };
 
   constructor(private store: Store, private dialog: MatDialog) {
     this.claims$ = this.store.select(selectFilteredClaims);
@@ -89,4 +98,13 @@ export class ClaimListComponent implements OnInit {
   filterClaims() {
     this.store.dispatch(filterClaims({ filter: this.filterValue }));
   }
+
+  applyFilters() {
+    this.store.dispatch(applyFilters({ filter: this.filter }));
+  }
+
+  updateFilter(field: string, value: any) {
+    this.filter = { ...this.filter, [field]: value };
+  }
+  
 }

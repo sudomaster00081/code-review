@@ -13,7 +13,7 @@ import {
   addClaim,
   addClaimSuccess,
   addClaimFailure,
-  filterClaims } from '../actions/claim.actions'
+  filterClaims, applyFilters } from '../actions/claim.actions'
 import { Claim } from '../../models/claim.model';
 
 export interface ClaimState {
@@ -21,6 +21,8 @@ export interface ClaimState {
   filteredClaims: Claim[]; // Filtered claims based on search criteria
   loading: boolean; // Loading state
   error: string | null; // Error state
+  filters: any;
+
 }
 
 export const initialState: ClaimState = {
@@ -28,6 +30,14 @@ export const initialState: ClaimState = {
   filteredClaims: [],
   loading: false,
   error: null,
+  filters: {
+    patientName: '',
+    status: '',
+    claimDateFrom: null,
+    claimDateTo: null,
+    minAmount: null,
+    maxAmount: null,
+  },
 };
 
 // The reducer function
@@ -86,7 +96,15 @@ export const claimReducer = createReducer(
       filteredClaims: filtered,
     };
   }),
+
+   // Handle applying filters
+   on(applyFilters, (state, { filter }) => ({
+    ...state,
+    filters: filter
+  }))
+
 );
+
 
 export function reducer(state: ClaimState | undefined, action: Action) {
     return claimReducer(state, action);

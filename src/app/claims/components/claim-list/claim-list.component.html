@@ -7,9 +7,61 @@
     <button (click)="openAddClaimModal()">Add New Claim</button>
   </div>
   
-<div>
-    <input [(ngModel)]="filterValue" (input)="filterClaims()" placeholder="Filter claims...">
-  </div>
+  <h2>Filter Claims</h2>
+  <form #filterForm="ngForm">
+    <label>Patient Name:</label>
+    <input 
+      type="text" 
+      [ngModel]="filter.patientName" 
+      (ngModelChange)="updateFilter('patientName', $event)" 
+      name="patientName" 
+    />
+
+    <label>Status:</label>
+    <select 
+      [ngModel]="filter.status" 
+      (ngModelChange)="updateFilter('status', $event)" 
+      name="status">
+      <option value="">All</option>
+      <option value="Pending">Pending</option>
+      <option value="Approved">Approved</option>
+      <option value="Denied">Denied</option>
+    </select>
+
+    <label>Claim Date (From):</label>
+    <input 
+      type="date" 
+      [ngModel]="filter.claimDateFrom" 
+      (ngModelChange)="updateFilter('claimDateFrom', $event)" 
+      name="claimDateFrom" 
+    />
+
+    <label>Claim Date (To):</label>
+    <input 
+      type="date" 
+      [ngModel]="filter.claimDateTo" 
+      (ngModelChange)="updateFilter('claimDateTo', $event)" 
+      name="claimDateTo" 
+    />
+
+    <label>Minimum Amount:</label>
+    <input 
+      type="number" 
+      [ngModel]="filter.minAmount" 
+      (ngModelChange)="updateFilter('minAmount', $event)" 
+      name="minAmount" 
+    />
+
+    <label>Maximum Amount:</label>
+    <input 
+      type="number" 
+      [ngModel]="filter.maxAmount" 
+      (ngModelChange)="updateFilter('maxAmount', $event)" 
+      name="maxAmount" 
+    />
+
+    <button type="button" (click)="applyFilters()">Go</button>
+  </form>
   
   <div *ngIf="(loading$ | async)">
     Loading claims...
