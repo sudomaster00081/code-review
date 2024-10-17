@@ -22,8 +22,9 @@
   
   <ul *ngIf="!(loading$ | async) && !(error$ | async)" class="claim-table">
     <li class="claim-header">
-      
+    <span></span>
     <span><strong>Encounter Id</strong></span>
+    <span>Actions</span>
     <span><strong>Patient Name</strong></span>
     <span><strong>Description</strong></span>
     <span><strong>Claim Date</strong></span>
@@ -40,11 +41,16 @@
     <span><strong>Payer Code</strong></span>
     <span><strong>Visit Type</strong></span>
 
-      <span>Actions</span>
+      
     </li>
     <li *ngFor="let claim of claims$ | async" class="claim-row">
-
+<span><input type="checkbox" value=claim.id></span>
 <span>{{ claim.encId }}</span>
+<div class="action-buttons">
+  <button class="edit-btn" (click)="updateClaim(claim)">Edit</button>
+  <button class="delete-btn" (click)="deleteClaim(claim.id)">Delete</button>
+  <button class="approve-btn" (click)="approveClaim(claim)">Approve</button>
+</div>
 <span>{{ claim.patientName }}</span>
 <span>{{ claim.description }}</span>
 <span>{{ claim.claimDate | date }}</span>
@@ -61,10 +67,7 @@
 <span>{{ claim.payerCode }}</span>
 <span>{{ claim.visitType }}</span>
 
-      <div class="action-buttons">
-        <button class="edit-btn" (click)="updateClaim(claim)">Edit</button>
-        <button class="delete-btn" (click)="deleteClaim(claim.id)">Delete</button>
-      </div>
+      
     </li>
   </ul>
   

@@ -71,4 +71,12 @@ export class ListClaimComponent implements OnInit {
     });
   }
   
+  
+  approveClaim(claim: Claim) {
+    const updatedClaim: Claim = { 
+        ...claim,
+        status: "Approved" as const 
+    };
+    this.store.dispatch(updateClaim({ claim: updatedClaim }));
+}
 }
