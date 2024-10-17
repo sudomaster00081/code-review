@@ -10,7 +10,7 @@ export interface Claim {
     status: 'Pending' | 'Approved' | 'Denied'; // Status of the claim
     assignedTo: string; // The staff assigned to the claim
     clinic: string;
-    tpaIns: string;
+    tpaIns: string; // TPA insurance
     plan: string;
     clinicianId: string;
     mrNo: string;
@@ -20,8 +20,8 @@ export interface Claim {
     visitType: 'IP' | 'OP' ;
     department: string;
     region: string;
-    doctor: string;
-    modifiedMr: boolean;
+    doctor: string; // Name of the doctor
+    modifiedMr: boolean; // Flag to indicate if the MR is modified
     billStatus : 'Billed' | 'UnBilled';
     claimStatus : 'Pending' | 'Reviewed';
     
