@@ -19,5 +19,11 @@ export interface Claim {
     payerCode: string;
     visitType: 'IP' | 'OP' ;
     department: string;
+    region: string;
+    doctor: string;
+    modifiedMr: boolean;
+    billStatus : 'Billed' | 'UnBilled';
+    claimStatus : 'Pending' | 'Reviewed';
+    
   }
   

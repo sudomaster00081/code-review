@@ -1,10 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 
-import { applyFilters } from '../../store/actions/claim.actions';
+import { applyFilters, loadClaims } from '../../store/actions/claim.actions';
+import { Claim } from '../../models/claim.model';
+import { map, Observable, tap } from 'rxjs';
+import { selectClaims, selectFilteredClaims } from '../../store/selectors/claim.selectors';
 
 
 @Component({
@@ -14,7 +17,7 @@ import { applyFilters } from '../../store/actions/claim.actions';
   templateUrl: './filter-claim.component.html',
   styleUrl: './filter-claim.component.scss'
 })
-export class FilterClaimComponent {
+export class FilterClaimComponent implements OnInit {
   filter = {
     encId: null,
     patientName: '',
@@ -24,22 +27,60 @@ export class FilterClaimComponent {
     minAmount: null,
     maxAmount: null,
     visitType: null,
-    department: null
-  };
-  departments = [
-    'Emergency Medicine',
-    'Endocrinology',
-    'General Practice',
-    'Surgery',
-    'Preventive Care',
-    'Physical Therapy',
-    'Laboratory',
-    'Radiology',
-    'Allergy and Immunology'
-  ];
-  
+    department: null,
+    region: null,
+    doctor: null,
+    plan:null,
+    modifiedMr: null,
+    billStatus : null,
+    claimStatus : null,
+    clinic: null,
+    tapIns: null,
+    assignedTo: null,
+    tpaIns:null,
+  }; 
 
-  constructor(private store: Store) {}
+  claims$: Observable<Claim[]>;
+  departments$!: Observable<string[]>;
+  regions$!: Observable<string[]>;
+  doctors$!: Observable<string[]>;
+  plans$!: Observable<string[]>;
+  clinics$!: Observable<string[]>;
+  assignedTos$!: Observable<string[]>;
+  tpaIns$!: Observable<string[]>;
+
+
+  billStatusOptions = ['Billed', 'UnBilled'];
+
+  ngOnInit(): void {
+    // Load unique departments dynamically
+    this.departments$ = this.claims$.pipe(
+      map((claims: any[]) => Array.from(new Set(claims.map(claim => claim.department))))
+    );
+    this.regions$ = this.claims$.pipe(
+      map((claims: any[]) => Array.from(new Set(claims.map(claim => claim.region))))
+    );
+    this.doctors$ = this.claims$.pipe(
+      map((claims: any[]) => Array.from(new Set(claims.map(claim => claim.doctor))))
+    );
+    this.plans$ = this.claims$.pipe(
+      map((claims: any[]) => Array.from(new Set(claims.map(claim => claim.plan))))
+    );
+    this.clinics$ = this.claims$.pipe(
+      map((claims: any[]) => Array.from(new Set(claims.map(claim => claim.clinic))))
+    );
+    this.assignedTos$ = this.claims$.pipe(
+      map((claims: any[]) => Array.from(new Set(claims.map(claim => claim.assignedTo))))
+    );
+    this.tpaIns$ = this.claims$.pipe(
+      map((claims: any[]) => Array.from(new Set(claims.map(claim => claim.tpaIns))))
+    );
+
+  }
+
+  constructor(private store: Store) {
+    this.claims$ = this.store.select(selectClaims);
+  }
 
   updateFilter(field: string, value: any) {
     this.filter = { ...this.filter, [field]: value };
@@ -50,4 +91,8 @@ export class FilterClaimComponent {
     this.store.dispatch(applyFilters({ filter: this.filter }));
   }
 
+  ngOnDestroy(): void {
+    // unsubscribe from departments
+    this.departments$.subscribe().unsubscribe();
+  }
 }

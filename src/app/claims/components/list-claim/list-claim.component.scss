@@ -316,3 +316,14 @@ $table-height: 400px; // Fixed height for the table
     }
   }
 }
+
+.none-found {
+  text-align: center; // Center the text
+  font-size: 1.2em; // Make the font a bit larger
+  color: #999; // Use a muted color for the message
+  margin: 20px 0; // Add some margin for spacing
+  padding: 10px; // Add padding for a better look
+  border: 1px dashed #ccc; // Optional: add a border to make it stand out
+  border-radius: 5px; // Round the corners a bit
+  background-color: #f9f9f9; // Light background color
+}

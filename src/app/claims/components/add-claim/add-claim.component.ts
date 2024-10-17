@@ -1,5 +1,5 @@
 // add-claim-modal.component.ts
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Claim } from '../../models/claim.model';
 import { FormsModule } from '@angular/forms';
@@ -32,7 +32,11 @@ export class AddClaimModalComponent {
     payerCode: '',
     visitType: 'IP',
     department: '',
-
+    region: '',
+    doctor: '',
+    modifiedMr: false,
+    billStatus : 'UnBilled',
+    claimStatus : 'Pending', 
   };
 
   constructor(public dialogRef: MatDialogRef<AddClaimModalComponent>) {}
@@ -43,5 +47,7 @@ export class AddClaimModalComponent {
 
   closeModal() {
     this.dialogRef.close(); // Close without saving
+  }
+  ngOnDestroy(): void {
   }
 }
