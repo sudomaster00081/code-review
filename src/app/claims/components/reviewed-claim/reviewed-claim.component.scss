@@ -1,0 +1,329 @@
+.claim-list-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .add-claim-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .add-claim-btn:hover {
+    background-color: #45a049;
+  }
+  
+  h2 {
+    margin-bottom: 10px;
+  }
+  
+  .filter-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  input, select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+  }
+  
+  .apply-filter-btn {
+    grid-column: span 2;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .apply-filter-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .loading, .error {
+    text-align: center;
+    margin-top: 20px;
+    color: #ff3333;
+  }
+  
+  .claim-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .claim-item {
+    padding: 15px;
+    margin: 10px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .edit-btn, .delete-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .edit-btn {
+    background-color: #FFEB3B;
+  }
+  
+  .edit-btn:hover {
+    background-color: #FDD835;
+  }
+  
+  .delete-btn {
+    background-color: #F44336;
+    color: white;
+  }
+  
+  .delete-btn:hover {
+    background-color: #D32F2F;
+  }
+  
+
+  .claim-table {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  
+  .claim-header {
+    display: table-row;
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .claim-row {
+    display: table-row;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .claim-header span, 
+  .claim-row span {
+    display: table-cell;
+    padding: 10px 15px;
+    border-right: 1px solid #ddd;
+  }
+  
+  .claim-header span:last-child, 
+  .claim-row span:last-child {
+    border-right: none;
+  }
+  
+  .action-buttons {
+    display: table-cell;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .edit-btn, .delete-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .edit-btn {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .edit-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .delete-btn {
+    background-color: #F44336;
+    color: white;
+  }
+  
+  .delete-btn:hover {
+    background-color: #D32F2F;
+  }
+  
+  .claim-row:hover {
+    background-color: #f9f9f9;
+  }
+  
+
+  $primary-color: #4CAF50;
+$secondary-color: #2196F3;
+$error-color: #f44336;
+$header-bg-color: #f2f2f2;
+$row-bg-color: #f9f9f9;
+$hover-opacity: 0.8;
+$padding: 5px; // Reduced padding
+$font-size-small: 0.8em; // Smaller font size
+$font-size-header: 1em; // Header font size
+$table-height: 400px; // Fixed height for the table
+
+.claim-list-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  font-size: $font-size-small; // Apply small font size to the container
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+
+    .add-claim-btn {
+      padding: $padding;
+      background-color: $primary-color;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+    }
+  }
+
+  .loading,
+  .error {
+    text-align: center;
+    font-size: 1em; // Keep loading/error text slightly larger
+    margin: 15px 0;
+  }
+
+  .claim-table-container {
+    max-height: $table-height; // Set maximum height for the container
+    overflow: auto; // Enable both vertical and horizontal scrolling
+    border: 1px solid #ddd; // Optional border for better visibility
+
+    .claim-table {
+      width: 100%;
+      border-collapse: collapse;
+
+      .claim-header,
+      .claim-row {
+        display: grid;
+        grid-template-columns: repeat(14, 1fr) 100px; // Adjust for last column width (actions)
+        padding: $padding;
+        border-bottom: 1px solid #ddd;
+
+        &.claim-header {
+          background-color: $header-bg-color;
+          font-weight: bold;
+          text-align: center;
+          font-size: $font-size-header; // Header font size
+        }
+
+        &:nth-child(even) {
+          background-color: $row-bg-color;
+        }
+
+        span {
+          padding: 2px; // Reduced padding for span elements
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          text-align: left; // Align text to the left for better readability
+        }
+
+        .action-buttons {
+          display: flex;
+          justify-content: center; // Center buttons in the last column
+          gap: 5px; // Reduced gap between buttons
+
+          .edit-btn,
+          .delete-btn {
+            padding: 3px 6px; // Smaller button padding
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+
+            &.edit-btn {
+              background-color: $secondary-color;
+              color: white;
+
+              &:hover {
+                background-color: darken($secondary-color, 10%);
+              }
+            }
+
+            &.delete-btn {
+              background-color: $error-color;
+              color: white;
+
+              &:hover {
+                background-color: darken($error-color, 10%);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Responsive styles
+  @media (max-width: 768px) {
+    .claim-header,
+    .claim-row {
+      grid-template-columns: repeat(8, 1fr) 80px; // Adjust for smaller screens
+    }
+  }
+
+  @media (max-width: 480px) {
+    .claim-header,
+    .claim-row {
+      grid-template-columns: repeat(4, 1fr) 50px; // Further adjust for very small screens
+    }
+
+    span {
+      font-size: 0.7em; // Further reduce font size for very small screens
+    }
+  }
+}
+
+.none-found {
+  text-align: center; // Center the text
+  font-size: 1.2em; // Make the font a bit larger
+  color: #999; // Use a muted color for the message
+  margin: 20px 0; // Add some margin for spacing
+  padding: 10px; // Add padding for a better look
+  border: 1px dashed #ccc; // Optional: add a border to make it stand out
+  border-radius: 5px; // Round the corners a bit
+  background-color: #f9f9f9; // Light background color
+}

@@ -28,35 +28,42 @@ export interface ClaimState {
         assignedTo: string | null; // User assigned to the claim
         billStatus: string | null; // Billing status
         tpaIns: string | null; // Third-party administrator insurance
+        claimStatus: string | null;
+        assignedToMe: boolean | null;
     };
     claims: Claim[]; // Array of claims
     filteredClaims: Claim[]; // Array of filtered claims
     loading: boolean; // Indicates if data is being loaded
     error: string | null; // Error message if any
+    filteredClaimsPending: Claim[]; // Array of filtered claims with pending status
 }
 
 export const initialState: ClaimState = {
     claims: [],
     filteredClaims: [],
+    filteredClaimsPending: [],
     loading: false,
     error: null,
     filters: {
-        patientName: '',
-        status: null,
-        claimDateFrom: null,
-        claimDateTo: null,
-        minAmount: null,
-        maxAmount: null,
-        visitType: null,
-        encId: null,
-        department: null,
-        region: null,
-        plan: null,
-        doctor: null,
-        clinic: null,
-        modifiedMr: null,
-        assignedTo: null,
-        billStatus: null,
-        tpaIns: null,
+      encId: null,
+      patientName: '',
+      status: null,
+      claimDateFrom: null,
+      claimDateTo: null,
+      minAmount: null,
+      maxAmount: null,
+      visitType: null,
+      department: null,
+      region: null,
+      doctor: null,
+      plan:null,
+      modifiedMr: null,
+      billStatus : null,
+      claimStatus : null,
+      clinic: null,
+      assignedTo: null,
+      tpaIns:null,
+      assignedToMe:null
     },
 };
+

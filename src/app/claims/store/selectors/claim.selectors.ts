@@ -1,6 +1,7 @@
 // src/app/claims/store/selectors/claim.selectors.ts
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { ClaimState } from '../claim.state';
+import { ClaimState, ClaimStatus } from '../claim.state';
+import { Claim } from '../../models/claim.model';
 
 export const selectClaimState = createFeatureSelector<ClaimState>('claims');
 
@@ -9,6 +10,10 @@ export const selectClaims = createSelector(
   (state: ClaimState) => state.claims
 );
 
+export const selectFilter = createSelector(
+  selectClaimState,
+  (state: ClaimState) => state.filters
+)
 
 export const selectLoading = createSelector(
   selectClaimState,
@@ -22,31 +27,28 @@ export const selectError = createSelector(
 
 export const selectFilteredClaims = createSelector(
   selectClaimState,
+  (state: ClaimState) => state.filteredClaims
+);
+
+
+export const selectApprovedClaims = createSelector(
+  selectClaimState,
   (state: ClaimState) => {
-    const { patientName, status, claimDateFrom, claimDateTo, minAmount, maxAmount, visitType, encId, department, region, plan, doctor, clinic, modifiedMr, assignedTo, billStatus, tpaIns} = state.filters;
+    return state.claims.filter(claim => claim.status === 'Approved');
+  }
+);
 
-    return state.claims.filter(claim => {
-      // Apply filters for each field
-      const matchesPatientName = patientName ? claim.patientName.includes(patientName) : true;
-      const matchesStatus = status ? claim.status === status : true;
-      const matchesDateFrom = claimDateFrom ? new Date(claim.claimDate) >= new Date(claimDateFrom) : true;
-      const matchesDateTo = claimDateTo ? new Date(claim.claimDate) <= new Date(claimDateTo) : true;
-      const matchesMinAmount = minAmount ? claim.amount >= minAmount : true;
-      const matchesMaxAmount = maxAmount ? claim.amount <= maxAmount : true;
-      const matchesVisitType = visitType ? claim.visitType === visitType : true;
-      const matchesEncId = encId ? claim.encId === encId : true;
-      const matchesDepartment = department ? claim.department === department : true;
-      const matchesRegion = region ? claim.region === region : true;
-      const matchesPlan = plan ? claim.plan === plan : true;
-      const matchesDoctor = doctor ? claim.doctor === doctor : true;
-      const matchesClinic = clinic ? claim.clinic === clinic : true;
-      const matchesModifiedMr = modifiedMr ? claim.modifiedMr === modifiedMr : true;
-      const matchesAssignedTo = assignedTo ? claim.assignedTo === assignedTo : true;
-      const matchesBillStatus = billStatus ? claim.billStatus === billStatus : true;
-      const matchesTpaIns = tpaIns ? claim.tpaIns === tpaIns : true;
+export const selectPendingClaims = createSelector(
+  selectClaimState,
+  (state: ClaimState) => {
+    return state.claims.filter(claim => claim.status === 'Pending');
+  }
+);
 
 
-      return matchesPatientName && matchesStatus && matchesDateFrom && matchesDateTo && matchesMinAmount && matchesMaxAmount && matchesVisitType && matchesEncId && matchesDepartment && matchesRegion && matchesPlan && matchesDoctor && matchesClinic && matchesModifiedMr && matchesAssignedTo && matchesBillStatus && matchesTpaIns;
-    });
+export const selectPendingFilteredClaims = createSelector(
+  selectClaimState,
+  (state: ClaimState) => {
+    return state.filteredClaims.filter(claim => claim.status === "Pending");
   }
 );

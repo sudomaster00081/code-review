@@ -15,6 +15,7 @@ import {
   selectFilteredClaims,
   selectLoading,
   selectError,
+  selectPendingFilteredClaims,
 } from '../../store/selectors/claim.selectors';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -32,8 +33,10 @@ export class ListClaimComponent implements OnInit {
   loading$: Observable<boolean>;
   error$: Observable<string | null>;
 
+  displayedCount = 3;
+
   constructor(private store: Store, private dialog: MatDialog) {
-    this.claims$ = this.store.select(selectFilteredClaims);
+    this.claims$ = this.store.select(selectPendingFilteredClaims);
     this.loading$ = this.store.select(selectLoading);
     this.error$ = this.store.select(selectError);
   }
@@ -79,4 +82,10 @@ export class ListClaimComponent implements OnInit {
     };
     this.store.dispatch(updateClaim({ claim: updatedClaim }));
 }
+
+loadMore() {
+  this.displayedCount += 5; // Increase the count of displayed claims
+}
+
+
 }

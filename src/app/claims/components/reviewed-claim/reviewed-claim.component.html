@@ -1,0 +1,74 @@
+<!-- claim-list.component.html -->
+<div class="claim-list-container">
+    <div class="header">
+      <h2>Reviewed Claims List</h2>
+      <!-- <button class="add-claim-btn" (click)="openAddClaimModal()">Add New Claim</button> -->
+    </div>
+  
+    <div *ngIf="(loading$ | async)" class="loading">
+      Loading claims...
+    </div>
+  
+    <div *ngIf="(error$ | async) as error" class="error">
+      Error: {{ error }}
+    </div>
+  
+    <div *ngIf="claims$ | async as claims">
+      <div class="none-found" *ngIf="claims.length === 0">
+        No claims available. Try Other Filters
+      </div>
+      
+      <ul *ngIf="!(loading$ | async) && !(error$ | async)" class="claim-table">
+        <li class="claim-header">
+          <span></span>
+          <span><strong>Encounter Id</strong></span>
+          <span>Actions</span>
+          <span><strong>Patient Name</strong></span>
+          <span><strong>Description</strong></span>
+          <span><strong>Claim Date</strong></span>
+          <span><strong>Amount</strong></span>
+          <span><strong>Status</strong></span>
+          <span><strong>Assigned To</strong></span>
+          <span><strong>Clinic</strong></span>
+          <span><strong>TPA Insurance</strong></span>
+          <span><strong>Plan</strong></span>
+          <span><strong>Clinician ID</strong></span>
+          <span><strong>MR No</strong></span>
+          <span><strong>Visit Start</strong></span>
+          <span><strong>Visit End</strong></span>
+          <span><strong>Payer Code</strong></span>
+          <span><strong>Visit Type</strong></span>
+        </li>
+        
+        <li *ngFor="let claim of claims.slice(0, displayedCount)" class="claim-row">
+          <span><input type="checkbox" [value]="claim.id"></span>
+          <span>{{ claim.encId }}</span>
+          <div class="action-buttons">
+            <!-- <button class="edit-btn" (click)="updateClaim(claim)">Edit</button>
+            <button class="delete-btn" (click)="deleteClaim(claim.id)">Delete</button> -->
+            <button class="approve-btn" (click)="callBackClaim(claim)">Call Back</button>
+          </div>
+          <span>{{ claim.patientName }}</span>
+          <span>{{ claim.description }}</span>
+          <span>{{ claim.claimDate | date }}</span>
+          <span>${{ claim.amount }}</span>
+          <span>{{ claim.status }}</span>
+          <span>{{ claim.assignedTo }}</span>
+          <span>{{ claim.clinic }}</span>
+          <span>{{ claim.tpaIns }}</span>
+          <span>{{ claim.plan }}</span>
+          <span>{{ claim.clinicianId }}</span>
+          <span>{{ claim.mrNo }}</span>
+          <span>{{ claim.visitStart }}</span>
+          <span>{{ claim.visitEnd }}</span>
+          <span>{{ claim.payerCode }}</span>
+          <span>{{ claim.visitType }}</span>
+        </li>
+      </ul>
+  
+      <button *ngIf="displayedCount < claims.length" (click)="loadMore()" class="load-more-btn">
+        Show More
+      </button>
+    </div>
+  </div>
+  

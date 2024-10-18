@@ -1,19 +1,23 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 .app-container {
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    height: 100vh; /* Full viewport height */
+    flex-direction: column; /* or row if you want them side by side */
+    width: 100%;
+}
+
+.app-filter,
+.app-list {
+    flex: 1; /* Allow the items to grow and fill space evenly */
+    min-height: 0; /* Ensure that the elements can shrink properly */
 }
 
 .app-filter {
-    flex: 0 0 auto; /* Fixed size for the filter */
-    /* Optional styles for aesthetics */
-    background-color: #f0f0f0;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 5px; /* Adjust as needed */
+    background: #f0f0f0; /* Light background for distinction */
 }
-
-.app-list {
-    flex: 1; /* Takes remaining space */
-    overflow-y: auto; /* Scrollable if content overflows */
-    padding: 10px;
-}
+    

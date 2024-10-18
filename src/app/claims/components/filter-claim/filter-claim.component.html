@@ -10,9 +10,7 @@
         name="patientName" 
         placeholder="Enter patient name"
       />
-    </div>
 
-    <div class="form-group">
       <label>Status:</label>
       <select 
         [ngModel]="filter.status" 
@@ -24,8 +22,6 @@
         <option value="Denied">Denied</option>
       </select>
     </div>
-
-    <div class="form-group">
       <label>Claim Date (From):</label>
       <input 
         type="date" 
@@ -33,9 +29,7 @@
         (ngModelChange)="updateFilter('claimDateFrom', $event)" 
         name="claimDateFrom" 
       />
-    </div>
 
-    <div class="form-group">
       <label>Claim Date (To):</label>
       <input 
         type="date" 
@@ -43,9 +37,7 @@
         (ngModelChange)="updateFilter('claimDateTo', $event)" 
         name="claimDateTo" 
       />
-    </div>
 
-    <div class="form-group">
       <label>Min Amount:</label>
       <input 
         type="number" 
@@ -54,9 +46,7 @@
         name="minAmount" 
         placeholder="Min amount"
       />
-    </div>
 
-    <div class="form-group">
       <label>Max Amount:</label>
       <input 
         type="number" 
@@ -65,7 +55,6 @@
         name="maxAmount" 
         placeholder="Max amount"
       />
-    </div>
     <div class="form-group">
   <label>Visit Type</label>
   <div class="radio-group">
@@ -79,8 +68,6 @@
         value="IP"
       />
       <label for="visitTypeIP">IP</label>
-    </div>
-    <div>
       <input 
         type="radio" 
         [ngModel]="filter.visitType" 
@@ -99,73 +86,57 @@
     <option *ngFor="let department of (departments$ | async)" [value]="department">{{ department }}</option>
   </select>  
   
-
-</div>
-
-<div class="form-group">
   <label>Encounter Id :</label>
   <input type="number" [ngModel]="filter.encId" 
   (ngModelChange)="updateFilter('encId', $event)" 
   name="encId">
-</div>
-
-<div class="form-group">
   <label>Region :</label>
   <select [ngModel]="filter.region" name="region" (ngModelChange)="updateFilter('region', $event)">
     <option *ngFor="let region of (regions$ | async)" [value]="region">{{ region }}</option>
   </select>  
-</div>
-<div class="form-group">
+
   <label>Plan :</label>
   <select [ngModel]="filter.plan" name="plan" (ngModelChange)="updateFilter('plan', $event)">
     <option *ngFor="let plan of (plans$ | async)" [value]="plan">{{ plan }}</option>
   </select>  
-</div>
 
-<div class="form-group">
   <label>Doctors :</label>
   <select [ngModel]="filter.doctor" name="doctor" (ngModelChange)="updateFilter('doctor', $event)">
     <option *ngFor="let doctor of (doctors$ | async)" [value]="doctor">{{ doctor }}</option>
     
   </select>  
-</div>
-
-<div class="form-group">
   <label>Clinic :</label>
   <select [ngModel]="filter.clinic" name="clinic" (ngModelChange)="updateFilter('clinic', $event)">
     <option *ngFor="let clinic of (clinics$ | async)" [value]="clinic">{{ clinic }}</option>
   </select>  
-</div>
 
-<div class="form-group">
   <label>Assigned to me :</label>
-  <input type="checkbox"  [ngModel]="filter.region" 
-  (ngModelChange)="updateFilter('region', $event)" 
-  name="encId">
-</div>
+<input type="checkbox" 
+       [ngModel]="filter.assignedToMe" 
+       (ngModelChange)="updateFilter('assignedToMe', $event)" 
+       name="assignedToMe">
 
-<div class="form-group">
   <label>Modified MR :</label>
-  <input type="checkbox"  [ngModel]="filter.region" 
-  (ngModelChange)="updateFilter('region', $event)" 
-  name="encId">
-</div>
+  <input type="checkbox"
+         [ngModel]="filter.modifiedMr"
+         #modifiedMrCheckbox
+         (change)="updateFilter('modifiedMr', modifiedMrCheckbox.checked)"
+         name="modifiedMr">
+  
 
-<div class="form-group">
+  
+
+
   <label>Assigned To :</label>
   <select [ngModel]="filter.assignedTo" name="assignedTo" (ngModelChange)="updateFilter('assignedTo', $event)">
     <option *ngFor="let assignedTo of (assignedTos$ | async)" [value]="assignedTo">{{ assignedTo }}</option>
   </select>  
-</div>
 
-<div class="form-group">
   <label>Bill Status :</label>
   <select  [ngModel]="filter.billStatus"  name="billStatus" (ngModelChange)="updateFilter('billStatus', $event)">
 <option *ngFor="let billStatus of billStatusOptions" [value] = "billStatus"> {{billStatus}}</option>
   </select>
-</div>
 
-<div class="form-group">
   <label>TPA/ins/corp :</label>
   <select [ngModel]="filter.tpaIns" name="tpaIns" (ngModelChange)="updateFilter('tpaIns', $event)">
     <option *ngFor="let tpaIns of (tpaIns$ | async)" [value]="tpaIns">{{ tpaIns }}</option>

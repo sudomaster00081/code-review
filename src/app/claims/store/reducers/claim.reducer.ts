@@ -84,15 +84,44 @@ export const claimReducer = createReducer(
   }),
   on(addClaimFailure, (state, { error }) => ({ ...state, loading: false, error })),
 
-   // Handle applying filters
-   on(applyFilters, (state, { filter }) => ({
+on(applyFilters, (state, { filter }) => {
+  const filteredClaims = state.claims.filter(claim => matchesFilters(claim, filter));
+  return {
     ...state,
-    filters: filter
-  }))
-
-);
-
+    filters: filter,
+    filteredClaims, // Update filtered claims based on applied filters
+  };
+}),)
 
 export function reducer(state: ClaimState | undefined, action: Action) {
     return claimReducer(state, action);
+  }
+
+  function matchesFilters(claim: Claim, filters: any): boolean {
+    const {
+      patientName, status, claimDateFrom, claimDateTo,
+      minAmount, maxAmount, visitType, encId, department,
+      region, plan, doctor, clinic, modifiedMr, assignedTo,
+      billStatus, tpaIns
+    } = filters;
+  
+    return (
+      (!patientName || claim.patientName.includes(patientName)) &&
+      (!status || claim.status === status) &&
+      (!claimDateFrom || new Date(claim.claimDate) >= new Date(claimDateFrom)) &&
+      (!claimDateTo || new Date(claim.claimDate) <= new Date(claimDateTo)) &&
+      (!minAmount || claim.amount >= minAmount) &&
+      (!maxAmount || claim.amount <= maxAmount) &&
+      (!visitType || claim.visitType === visitType) &&
+      (!encId || claim.encId === encId) &&
+      (!department || claim.department === department) &&
+      (!region || claim.region === region) &&
+      (!plan || claim.plan === plan) &&
+      (!doctor || claim.doctor === doctor) &&
+      (!clinic || claim.clinic === clinic) &&
+      (modifiedMr === null || claim.modifiedMr === modifiedMr) &&
+      (!assignedTo || claim.assignedTo === assignedTo) &&
+      (!billStatus || claim.billStatus === billStatus) &&
+      (!tpaIns || claim.tpaIns === tpaIns)
+    );
   }

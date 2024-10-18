@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { applyFilters, loadClaims } from '../../store/actions/claim.actions';
 import { Claim } from '../../models/claim.model';
 import { map, Observable, tap } from 'rxjs';
-import { selectClaims, selectFilteredClaims } from '../../store/selectors/claim.selectors';
+import { selectClaims, selectFilter, selectFilteredClaims, selectPendingClaims, selectPendingFilteredClaims } from '../../store/selectors/claim.selectors';
 
 
 @Component({
@@ -38,6 +38,7 @@ export class FilterClaimComponent implements OnInit {
     tapIns: null,
     assignedTo: null,
     tpaIns:null,
+    assignedToMe:null
   }; 
 
   claims$: Observable<Claim[]>;
@@ -48,9 +49,17 @@ export class FilterClaimComponent implements OnInit {
   clinics$!: Observable<string[]>;
   assignedTos$!: Observable<string[]>;
   tpaIns$!: Observable<string[]>;
+  filter$!: Observable<any>;
 
 
   billStatusOptions = ['Billed', 'UnBilled'];
+
+  constructor(private store: Store) {
+    // this.claims$ = this.store.select(selectClaims);
+    this.claims$ = this.store.select(selectPendingClaims);
+    
+  }
+
 
   ngOnInit(): void {
     // Load unique departments dynamically
@@ -75,13 +84,11 @@ export class FilterClaimComponent implements OnInit {
     this.tpaIns$ = this.claims$.pipe(
       map((claims: any[]) => Array.from(new Set(claims.map(claim => claim.tpaIns))))
     );
+    
 
   }
 
-  constructor(private store: Store) {
-    this.claims$ = this.store.select(selectClaims);
-  }
-
+  
   updateFilter(field: string, value: any) {
     this.filter = { ...this.filter, [field]: value };
   }
