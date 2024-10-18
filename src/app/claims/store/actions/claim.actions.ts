@@ -63,3 +63,12 @@ export const applyFilters = createAction(
   '[Claims] Apply Filters',
   props<{ filter: any }>() // Filter object contains the filtering fields
 );
+
+export const applyFiltersOnPending = createAction(
+  '[Claims] Apply Filters On Pending',
+  props<{ filter: any }>() // Filter object contains the filtering fields
+)
+
+export const loadApprovedClaims = createAction(
+  '[Claims] Load Approved Claims'
+);

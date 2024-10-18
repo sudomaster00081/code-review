@@ -26,4 +26,26 @@ export interface Claim {
     claimStatus : 'Pending' | 'Reviewed';
     
   }
+
+export interface ClaimFilter {
+    encId: null,
+    patientName: null,
+    status: null,
+    claimDateFrom: null,
+    claimDateTo: null,
+    minAmount: null,
+    maxAmount: null,
+    visitType: null,
+    department: null,
+    region: null,
+    doctor: null,
+    plan:null,
+    modifiedMr: null,
+    billStatus : null,
+    claimStatus : null,
+    clinic: null,
+    assignedTo: null,
+    tpaIns:null,
+    assignedToMe:null
+}
   

@@ -15,7 +15,7 @@
 
   <div *ngIf="claims$ | async as claims">
     <div class="none-found" *ngIf="claims.length === 0">
-      No claims available. Try Other Filters
+      No claims Found. Try Other Filters
     </div>
     
     <ul *ngIf="!(loading$ | async) && !(error$ | async)" class="claim-table">

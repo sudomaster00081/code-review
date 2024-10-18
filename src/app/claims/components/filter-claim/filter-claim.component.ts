@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 
-import { applyFilters, loadClaims } from '../../store/actions/claim.actions';
+import { applyFilters, applyFiltersOnPending, loadClaims } from '../../store/actions/claim.actions';
 import { Claim } from '../../models/claim.model';
 import { map, Observable, tap } from 'rxjs';
 import { selectClaims, selectFilter, selectFilteredClaims, selectPendingClaims, selectPendingFilteredClaims } from '../../store/selectors/claim.selectors';
@@ -20,8 +20,8 @@ import { selectClaims, selectFilter, selectFilteredClaims, selectPendingClaims, 
 export class FilterClaimComponent implements OnInit {
   filter = {
     encId: null,
-    patientName: '',
-    status: '',
+    patientName: null,
+    status: "Pending",
     claimDateFrom: null,
     claimDateTo: null,
     minAmount: null,
@@ -95,7 +95,7 @@ export class FilterClaimComponent implements OnInit {
 
   applyFilters() {
     // console.log('Applying filters:', this.filter);
-    this.store.dispatch(applyFilters({ filter: this.filter }));
+    this.store.dispatch(applyFiltersOnPending({ filter: this.filter }));
   }
 
   ngOnDestroy(): void {

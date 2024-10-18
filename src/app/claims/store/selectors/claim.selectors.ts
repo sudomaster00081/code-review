@@ -7,7 +7,7 @@ export const selectClaimState = createFeatureSelector<ClaimState>('claims');
 
 export const selectClaims = createSelector(
   selectClaimState,
-  (state: ClaimState) => state.claims
+  (state: ClaimState) => state.allClaims
 );
 
 export const selectFilter = createSelector(
@@ -27,21 +27,21 @@ export const selectError = createSelector(
 
 export const selectFilteredClaims = createSelector(
   selectClaimState,
-  (state: ClaimState) => state.filteredClaims
+  (state: ClaimState) => state.filteredClaimsReviewed
 );
 
 
 export const selectApprovedClaims = createSelector(
   selectClaimState,
   (state: ClaimState) => {
-    return state.claims.filter(claim => claim.status === 'Approved');
+    return state.filteredClaimsReviewed;
   }
 );
 
 export const selectPendingClaims = createSelector(
   selectClaimState,
   (state: ClaimState) => {
-    return state.claims.filter(claim => claim.status === 'Pending');
+    return state.allClaims.filter(claim => claim.status === 'Pending');
   }
 );
 
@@ -49,6 +49,6 @@ export const selectPendingClaims = createSelector(
 export const selectPendingFilteredClaims = createSelector(
   selectClaimState,
   (state: ClaimState) => {
-    return state.filteredClaims.filter(claim => claim.status === "Pending");
+    return state.filteredClaimsPending
   }
 );

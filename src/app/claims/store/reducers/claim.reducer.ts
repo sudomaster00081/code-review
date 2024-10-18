@@ -12,31 +12,49 @@ import {
   deleteClaimFailure,
   addClaim,
   addClaimSuccess,
-  addClaimFailure, applyFilters } from '../actions/claim.actions'
-import { Claim } from '../../models/claim.model';
+  addClaimFailure, applyFilters, 
+  applyFiltersOnPending,
+  loadApprovedClaims} from '../actions/claim.actions'
+import { Claim, ClaimFilter } from '../../models/claim.model';
+import { state } from '@angular/animations';
 
 export interface ClaimState {
-  claims: Claim[]; // Array of claims
-  filteredClaims: Claim[]; // Filtered claims based on search criteria
+  allClaims: Claim[]; // Array of claims
+  filteredClaimsPending: Claim[]; 
   loading: boolean; // Loading state
   error: string | null; // Error state
-  filters: any;
+  filters: ClaimFilter;
+  filteredClaimsReviewed: Claim[]; // Filtered claims based on search reviewed
 
 }
 
 export const initialState: ClaimState = {
-  claims: [],
-  filteredClaims: [],
+  allClaims: [],
   loading: false,
   error: null,
   filters: {
-    patientName: '',
-    status: '',
+    patientName: null,
+    status: null,
     claimDateFrom: null,
     claimDateTo: null,
     minAmount: null,
     maxAmount: null,
+    encId: null,
+    visitType: null,
+    department: null,
+    region: null,
+    doctor: null,
+    plan: null,
+    modifiedMr: null,
+    billStatus: null,
+    claimStatus: null,
+    clinic: null,
+    assignedTo: null,
+    tpaIns: null,
+    assignedToMe: null
   },
+  filteredClaimsReviewed: [],
+  filteredClaimsPending: []
 };
 
 // The reducer function
@@ -47,12 +65,12 @@ export const claimReducer = createReducer(
     ...state,
     loading: false,
     claims,
-    filteredClaims: claims, // Initialize filtered claims
+    allClaims: claims, // Initialize filtered claims
   })),
   on(loadClaimsFailure, (state, { error }) => ({ ...state, loading: false, error })),
   on(updateClaim, (state) => ({ ...state, loading: true })),
   on(updateClaimSuccess, (state, { claim }) => {
-    const updatedClaims = state.claims.map(c => (c.id === claim.id ? claim : c));
+    const updatedClaims = state.allClaims.map(c => (c.id === claim.id ? claim : c));
     return {
       ...state,
       loading: false,
@@ -63,7 +81,7 @@ export const claimReducer = createReducer(
   on(updateClaimFailure, (state, { error }) => ({ ...state, loading: false, error })),
   on(deleteClaim, (state) => ({ ...state, loading: true })),
   on(deleteClaimSuccess, (state, { claimId }) => {
-    const updatedClaims = state.claims.filter(c => c.id !== claimId);
+    const updatedClaims = state.allClaims.filter(c => c.id !== claimId);
     return {
       ...state,
       loading: false,
@@ -74,7 +92,7 @@ export const claimReducer = createReducer(
   on(deleteClaimFailure, (state, { error }) => ({ ...state, loading: false, error })),
   on(addClaim, (state) => ({ ...state, loading: true })),
   on(addClaimSuccess, (state, { claim }) => {
-    const updatedClaims = [...state.claims, claim];
+    const updatedClaims = [...state.allClaims, claim];
     return {
       ...state,
       loading: false,
@@ -84,14 +102,35 @@ export const claimReducer = createReducer(
   }),
   on(addClaimFailure, (state, { error }) => ({ ...state, loading: false, error })),
 
-on(applyFilters, (state, { filter }) => {
-  const filteredClaims = state.claims.filter(claim => matchesFilters(claim, filter));
-  return {
-    ...state,
-    filters: filter,
-    filteredClaims, // Update filtered claims based on applied filters
-  };
-}),)
+  on(applyFilters, (state, { filter }) => {
+    const filteredClaims = state.allClaims.filter(claim => matchesFilters(claim, filter));
+    return {
+      ...state,
+      filters: filter,
+      filteredClaimsPending: filteredClaims, // Update filtered claims based on applied filters
+    };
+  }),
+
+  on(applyFiltersOnPending, (state, { filter }) => {
+    const filteredClaims = state.allClaims.filter((claim: Claim) => matchesFilters(claim, filter));
+    return {
+      ...state,
+      filters: filter,
+      filteredClaimsPending: filteredClaims, // Update filtered claims based on claim status = pending
+    };
+  }),
+
+  on(loadApprovedClaims, (state) => {
+    const filteredClaims = state.allClaims.filter((claim: Claim) => claim.status === "Approved");
+    return {
+      ...state,
+      filteredClaimsReviewed: filteredClaims,
+    };
+  }),
+
+)
+
+  
 
 export function reducer(state: ClaimState | undefined, action: Action) {
     return claimReducer(state, action);

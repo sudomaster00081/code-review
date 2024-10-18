@@ -116,21 +116,25 @@
        (ngModelChange)="updateFilter('assignedToMe', $event)" 
        name="assignedToMe">
 
-  <label>Modified MR :</label>
-  <input type="checkbox"
-         [ngModel]="filter.modifiedMr"
-         #modifiedMrCheckbox
-         (change)="updateFilter('modifiedMr', modifiedMrCheckbox.checked)"
-         name="modifiedMr">
+
+       <label>Assigned To :</label>
+       <select [ngModel]="filter.assignedTo" name="assignedTo" (ngModelChange)="updateFilter('assignedTo', $event)">
+         <option *ngFor="let assignedTo of (assignedTos$ | async)" [value]="assignedTo">{{ assignedTo }}</option>
+       </select>  
+
+       
+       <label>Modified MR:</label>
+       <input type="checkbox"
+              [ngModel]="filter.modifiedMr"
+              (ngModelChange)="updateFilter('modifiedMr', $event)"
+              name="modifiedMr">
+       
   
 
   
 
 
-  <label>Assigned To :</label>
-  <select [ngModel]="filter.assignedTo" name="assignedTo" (ngModelChange)="updateFilter('assignedTo', $event)">
-    <option *ngFor="let assignedTo of (assignedTos$ | async)" [value]="assignedTo">{{ assignedTo }}</option>
-  </select>  
+  
 
   <label>Bill Status :</label>
   <select  [ngModel]="filter.billStatus"  name="billStatus" (ngModelChange)="updateFilter('billStatus', $event)">
