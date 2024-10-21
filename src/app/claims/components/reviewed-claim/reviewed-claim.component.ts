@@ -30,7 +30,6 @@ export class ReviewedClaimComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    // throw new Error('Method not implemented.');
     this.store.dispatch(loadApprovedClaims());
   }
 

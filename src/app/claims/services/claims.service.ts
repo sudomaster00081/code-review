@@ -12,10 +12,6 @@ export class ClaimsService {
 
   constructor(private http: HttpClient) {}
 
-//   getClaims(): Observable<Claim[]> {
-//     return this.http.get<Claim[]>(this.apiUrl);
-//   }
-
   getClaims(): Observable<Claim[]> {
     return this.http.get<Claim[]>(this.apiUrl).pipe(
       tap(claims => console.log('Claims fetched:', claims)) // Log the claims

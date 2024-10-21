@@ -1,4 +1,4 @@
-// src/app/claims/store/selectors/claim.selectors.ts
+// claim.selectors.ts
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ClaimState, ClaimStatus } from '../claim.state';
 import { Claim } from '../../models/claim.model';

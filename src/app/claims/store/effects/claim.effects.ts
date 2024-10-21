@@ -29,7 +29,6 @@ export class ClaimEffects {
       ofType(loadClaims),
       mergeMap(() =>
         this.claimsService.getClaims().pipe(
-            // tap(claims => console.log('Claims fetched:', claims)), // Log claims here
           map(claims => loadClaimsSuccess({ claims })),
           catchError(error => of(loadClaimsFailure({ error: error.message })))
         )
@@ -79,7 +78,6 @@ export class ClaimEffects {
     this.actions$.pipe(
       ofType(loadClaimsSuccess),
       switchMap(() => {
-        // Dispatch loadApprovedClaims after successful claims loading
         return of(loadApprovedClaims());
       })
     )

@@ -25,7 +25,6 @@ import { state } from '@angular/animations';
 import { ClaimState, initialState } from '../claim.state';
 
 
-// The reducer function
 export const claimReducer = createReducer(
   initialState,
   on(loadClaims, (state) => ({ ...state, loading: true })),
@@ -33,7 +32,6 @@ export const claimReducer = createReducer(
     ...state,
     loading: false,
     allClaims: claims, // Initialize filtered claims
-    // filteredClaimsPending: claims.filter(c => c.status === 'Pending'),
     filteredClaimsReviewed: filtersOnReview(claims, state.filters),
   })),
   on(loadClaimsFailure, (state, { error }) => ({ ...state, loading: false, error })),
@@ -83,7 +81,6 @@ export const claimReducer = createReducer(
 
 
   on(applyFiltersOnPending, (state, { filter }) => {
-    // Set filter status to pending
     const updatedFilter = {
         ...filter,
         status: 'Pending', // Set the status to 'pending'

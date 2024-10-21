@@ -23,7 +23,6 @@ export class EditClaimModalComponent {
   ) {
     this.store.select(selectSelectedClaim).subscribe((state) => {
       this.claim = { ...state };
-      console.log('claim', this.claim);
     })
     
   }
@@ -34,7 +33,6 @@ export class EditClaimModalComponent {
   }
 
   closeModal() {
-    console.log('closing');
     this.store.dispatch(hideEditClaimForm());
   }
 }

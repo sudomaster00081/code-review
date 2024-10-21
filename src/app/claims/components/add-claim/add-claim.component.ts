@@ -1,6 +1,5 @@
 // add-claim-modal.component.ts
 import { Component, OnDestroy } from '@angular/core';
-// import { MatDialogRef } from '@angular/material/dialog';
 import { Claim } from '../../models/claim.model';
 import { FormsModule } from '@angular/forms';
 import { addClaim, hideAddClaimForm } from '../../store/actions/claim.actions';
@@ -42,7 +41,6 @@ export class AddClaimModalComponent {
   };
 
   constructor(
-    // public dialogRef: MatDialogRef<AddClaimModalComponent>,
     private store: Store
   ) {}
 
@@ -53,7 +51,6 @@ export class AddClaimModalComponent {
   }
 
   closeModal() {
-    // this.dialogRef.close(); // Close without saving
     this.store.dispatch(hideAddClaimForm());
   }
   ngOnDestroy(): void {

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-// import { MatDialog } from '@angular/material/dialog'; // Import Angular Material dialog
 import { EditClaimModalComponent } from '../edit-claim/edit-claim.component'; // Import the modal component
 
 import { Claim } from '../../models/claim.model';
@@ -74,16 +73,13 @@ export class ListClaimComponent implements OnInit {
 
 toggleAddClaimForm() {
   if (this.showAddClaimForm) {
-    console.log('hiding');
     this.store.dispatch(hideAddClaimForm());
   } else {
-    console.log('showing');
     this.store.dispatch(showAddClaimForm());
   }
 }
 
 editClaim(claim: any) {
-  console.log(claim);
   this.store.dispatch(showEditClaimForm())
   this.store.dispatch(settSelectedClaim({ claim: claim }));
 }

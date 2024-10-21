@@ -1,12 +1,10 @@
-// src/app/claims/store/claim.state.ts
+//claim.state.ts
 import { Claim, ClaimFilter } from '../models/claim.model';
 
-// Define possible statuses, visit types, etc. as enums if applicable
 export enum ClaimStatus {
     Pending = 'Pending',
     Approved = 'Approved',
     Rejected = 'Rejected',
-    // Add other statuses as needed
 }
 
 
