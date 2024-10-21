@@ -6,7 +6,11 @@
   </div>
 
   <div *ngIf="showAddClaimForm">
-    <app-add-claim (claimAdded)="onClaimAdded($event)"></app-add-claim>
+    <app-add-claim ></app-add-claim>
+  </div>
+
+  <div *ngIf="showEditClaimForm">
+    <app-edit-claim ></app-edit-claim>
   </div>
   
   <div *ngIf="(loading$ | async)" class="loading">
@@ -44,11 +48,12 @@
         <span><strong>Visit Type</strong></span>
       </li>
       
-      <li *ngFor="let claim of claims.slice(0, displayedCount)" class="claim-row">
+      <li *ngFor="let claim of claims" class="claim-row">
         <span><input type="checkbox" [value]="claim.id"></span>
         <span>{{ claim.encId }}</span>
         <div class="action-buttons">
-          <button class="edit-btn" (click)="updateClaim(claim)">Edit</button>
+          <button class="edit-btn" (click)="editClaim(claim)">Edit</button>
+
           <button class="delete-btn" (click)="deleteClaim(claim.id)">Delete</button>
           <button class="approve-btn" (click)="approveClaim(claim)">Approve</button>
         </div>
@@ -70,8 +75,5 @@
       </li>
     </ul>
 
-    <button *ngIf="displayedCount < claims.length" (click)="loadMore()" class="load-more-btn">
-      Show More
-    </button>
   </div>
 </div>

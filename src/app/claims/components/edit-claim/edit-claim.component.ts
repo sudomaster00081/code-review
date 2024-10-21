@@ -2,11 +2,10 @@
 import { Component, Inject, Input } from '@angular/core';
 import { Claim } from '../../models/claim.model';
 import { Store } from '@ngrx/store';
-import { updateClaim } from '../../store/actions/claim.actions';
+import { hideEditClaimForm, updateClaim } from '../../store/actions/claim.actions';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
+import { selectSelectedClaim } from '../../store/selectors/claim.selectors';
 
 @Component({
   selector: 'app-edit-claim',
@@ -17,20 +16,25 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 
 export class EditClaimModalComponent {
-  claim: Claim; // Holds the claim data to be edited
+  claim: any;
 
   constructor(
-    public dialogRef: MatDialogRef<EditClaimModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Claim // Inject the claim data passed from the dialog
+    private store: Store<{ claims: Claim[] }>
   ) {
-    this.claim = { ...data }; // Copy the incoming data
+    this.store.select(selectSelectedClaim).subscribe((state) => {
+      this.claim = { ...state };
+      console.log('claim', this.claim);
+    })
+    
   }
 
   saveChanges() {
-    this.dialogRef.close(this.claim); // Close the dialog and return the updated claim
+    this.store.dispatch(updateClaim({ claim: this.claim }));
+    this.closeModal()
   }
 
   closeModal() {
-    this.dialogRef.close(); // Close the dialog without saving changes
+    console.log('closing');
+    this.store.dispatch(hideEditClaimForm());
   }
 }

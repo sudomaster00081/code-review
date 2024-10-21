@@ -16,7 +16,10 @@ import {
   applyFiltersOnPending,
   loadApprovedClaims,
   showAddClaimForm,
-  hideAddClaimForm} from '../actions/claim.actions'
+  hideAddClaimForm,
+  showEditClaimForm,
+  hideEditClaimForm,
+  settSelectedClaim} from '../actions/claim.actions'
 import { Claim, ClaimFilter } from '../../models/claim.model';
 import { state } from '@angular/animations';
 import { ClaimState, initialState } from '../claim.state';
@@ -99,6 +102,11 @@ export const claimReducer = createReducer(
 
 on(showAddClaimForm, (state) => ({ ...state, showAddClaimForm: true })),
 on(hideAddClaimForm, (state) => ({ ...state, showAddClaimForm: false })),
+
+on(showEditClaimForm, (state) => ({ ...state, showEditClaimForm: true})),
+on(hideEditClaimForm, (state) => ({ ...state, showEditClaimForm: false })),
+
+on (settSelectedClaim, (state, {claim}) => ({...state, selectedClaim: claim})),
 
 )
 

@@ -3,7 +3,7 @@ import { Component, OnDestroy } from '@angular/core';
 // import { MatDialogRef } from '@angular/material/dialog';
 import { Claim } from '../../models/claim.model';
 import { FormsModule } from '@angular/forms';
-import { addClaim, hideAddClaimForm, updateClaim } from '../../store/actions/claim.actions';
+import { addClaim, hideAddClaimForm } from '../../store/actions/claim.actions';
 import { Store } from '@ngrx/store';
 
 @Component({

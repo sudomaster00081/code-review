@@ -71,3 +71,9 @@ export const loadApprovedClaims = createAction(
 
 export const showAddClaimForm = createAction('[Claim] Show Add Claim Form');
 export const hideAddClaimForm = createAction('[Claim] Hide Add Claim Form');
+
+export const showEditClaimForm = createAction('[Claim] Show Edit Claim Form');
+
+export const hideEditClaimForm = createAction('[Claim] Hide Edit Claim Form');
+
+export const settSelectedClaim = createAction('[Claim] Select Claim', props<{ claim: Claim }>());

@@ -19,6 +19,7 @@ export interface ClaimState {
     filteredClaimsPending: Claim[]; // Array of filtered claims with pending status
     showAddClaimForm: boolean; // Add this property
     showEditClaimForm: boolean;
+    selectedClaim: Claim | null;
 }
 
 export const initialState: ClaimState = {
@@ -50,5 +51,6 @@ export const initialState: ClaimState = {
     },
     showAddClaimForm: false, 
     showEditClaimForm: false,
+    selectedClaim: null
 };
 

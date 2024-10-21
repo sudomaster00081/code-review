@@ -21,8 +21,6 @@ export class ReviewedClaimComponent implements OnInit {
   error$: Observable<string | null>;
   
 
-  displayedCount = 3;
-
   constructor(private store: Store) {
     this.claims$ = this.store.select(selectApprovedClaims);
     this.loading$ = this.store.select(selectLoading);
@@ -36,9 +34,6 @@ export class ReviewedClaimComponent implements OnInit {
     this.store.dispatch(loadApprovedClaims());
   }
 
-  loadMore() {
-    this.displayedCount += 5; // Increase the count of displayed claims
-  }
 
   callBackClaim(claim: Claim) {
     const updatedClaim: Claim = { 

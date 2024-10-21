@@ -59,3 +59,13 @@ export const selectShowAddClaimForm = createSelector(
   selectClaimState,
   (state: ClaimState) => state.showAddClaimForm
 );
+
+export const selectShowEditClaimForm = createSelector(
+  selectClaimState,
+  (state: ClaimState) => state.showEditClaimForm
+);
+
+export const selectSelectedClaim = createSelector(
+  selectClaimState,
+  (state: ClaimState) => state.selectedClaim
+);

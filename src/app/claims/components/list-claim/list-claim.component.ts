@@ -12,6 +12,8 @@ import {
   addClaim,
   hideAddClaimForm,
   showAddClaimForm,
+  showEditClaimForm,
+  settSelectedClaim,
 } from '../../store/actions/claim.actions';
 import {
   selectFilteredClaims,
@@ -19,6 +21,7 @@ import {
   selectError,
   selectPendingFilteredClaims,
   selectShowAddClaimForm,
+  selectShowEditClaimForm,
 } from '../../store/selectors/claim.selectors';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -27,21 +30,17 @@ import { AddClaimModalComponent } from '../add-claim/add-claim.component';
 @Component({
   selector: 'app-list-claim',
   standalone: true,
-  imports: [CommonModule, FormsModule, AddClaimModalComponent],
+  imports: [CommonModule, FormsModule, AddClaimModalComponent, EditClaimModalComponent],
   templateUrl: './list-claim.component.html',
   styleUrl: './list-claim.component.scss'
 })
 export class ListClaimComponent implements OnInit {
-onClaimAdded($event: Event) {
-throw new Error('Method not implemented.');
-}
   claims$: Observable<Claim[]>;
   loading$: Observable<boolean>;
   error$: Observable<string | null>;
   showAddClaimForm!: boolean;
+  showEditClaimForm!: boolean;
   
-
-  displayedCount = 3;
 
   constructor(private store: Store) {
     this.claims$ = this.store.select(selectPendingFilteredClaims);
@@ -50,22 +49,13 @@ throw new Error('Method not implemented.');
     this.store.select(selectShowAddClaimForm).subscribe((state) => {
       this.showAddClaimForm = state;
     }); // Get the form visibility state
+    this.store.select(selectShowEditClaimForm).subscribe((state) => {
+      this.showEditClaimForm = state;
+    });
   }
 
   ngOnInit() {
     
-  }
-
-  updateClaim(claim: Claim) {
-    // const dialogRef = this.dialog.open(EditClaimModalComponent, {
-    //   data: claim, // Pass the claim data to the modal
-    // });
-
-    // dialogRef.afterClosed().subscribe((result: any) => {
-    //   if (result) {
-    //     this.store.dispatch(updateClaim({ claim: result })); // Dispatch the updated claim if the modal returned a result
-    //   }
-    // });
   }
 
   deleteClaim(claimId: number) {
@@ -81,9 +71,6 @@ throw new Error('Method not implemented.');
     this.store.dispatch(updateClaim({ claim: updatedClaim }));
 }
 
-loadMore() {
-  this.displayedCount += 5; // Increase the count of displayed claims
-}
 
 toggleAddClaimForm() {
   if (this.showAddClaimForm) {
@@ -93,8 +80,12 @@ toggleAddClaimForm() {
     console.log('showing');
     this.store.dispatch(showAddClaimForm());
   }
-
-
-
 }
+
+editClaim(claim: any) {
+  console.log(claim);
+  this.store.dispatch(showEditClaimForm())
+  this.store.dispatch(settSelectedClaim({ claim: claim }));
+}
+
 }

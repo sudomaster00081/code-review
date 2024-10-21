@@ -40,7 +40,7 @@
           <span><strong>Visit Type</strong></span>
         </li>
         
-        <li *ngFor="let claim of claims.slice(0, displayedCount)" class="claim-row">
+        <li *ngFor="let claim of claims" class="claim-row">
           <span><input type="checkbox" [value]="claim.id"></span>
           <span>{{ claim.encId }}</span>
           <div class="action-buttons">
@@ -66,9 +66,7 @@
         </li>
       </ul>
   
-      <button *ngIf="displayedCount < claims.length" (click)="loadMore()" class="load-more-btn">
-        Show More
-      </button>
+
     </div>
   </div>
   
