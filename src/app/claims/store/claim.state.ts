@@ -17,6 +17,8 @@ export interface ClaimState {
     loading: boolean; // Indicates if data is being loaded
     error: string | null; // Error message if any
     filteredClaimsPending: Claim[]; // Array of filtered claims with pending status
+    showAddClaimForm: boolean; // Add this property
+    showEditClaimForm: boolean;
 }
 
 export const initialState: ClaimState = {
@@ -46,5 +48,7 @@ export const initialState: ClaimState = {
       tpaIns:null,
       assignedToMe:null
     },
+    showAddClaimForm: false, 
+    showEditClaimForm: false,
 };
 

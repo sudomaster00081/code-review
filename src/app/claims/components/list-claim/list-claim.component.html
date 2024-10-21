@@ -2,9 +2,13 @@
 <div class="claim-list-container">
   <div class="header">
     <h2>Pending Claims List</h2>
-    <button class="add-claim-btn" (click)="openAddClaimModal()">Add New Claim</button>
+    <button class="add-claim-btn" (click)="toggleAddClaimForm()">  {{ (showAddClaimForm) ? 'Cancel' : 'Add Claim' }}</button>
   </div>
 
+  <div *ngIf="showAddClaimForm">
+    <app-add-claim (claimAdded)="onClaimAdded($event)"></app-add-claim>
+  </div>
+  
   <div *ngIf="(loading$ | async)" class="loading">
     Loading claims...
   </div>

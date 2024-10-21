@@ -54,3 +54,8 @@ export const selectApprovedClaims = createSelector(
     return state.filteredClaimsReviewed;
   }
 );
+
+export const selectShowAddClaimForm = createSelector(
+  selectClaimState,
+  (state: ClaimState) => state.showAddClaimForm
+);

@@ -14,7 +14,9 @@ import {
   addClaimSuccess,
   addClaimFailure,
   applyFiltersOnPending,
-  loadApprovedClaims} from '../actions/claim.actions'
+  loadApprovedClaims,
+  showAddClaimForm,
+  hideAddClaimForm} from '../actions/claim.actions'
 import { Claim, ClaimFilter } from '../../models/claim.model';
 import { state } from '@angular/animations';
 import { ClaimState, initialState } from '../claim.state';
@@ -94,6 +96,9 @@ export const claimReducer = createReducer(
     };
   }
 ),
+
+on(showAddClaimForm, (state) => ({ ...state, showAddClaimForm: true })),
+on(hideAddClaimForm, (state) => ({ ...state, showAddClaimForm: false })),
 
 )
 

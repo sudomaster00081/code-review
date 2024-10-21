@@ -68,3 +68,6 @@ export const applyFiltersOnPending = createAction(
 export const loadApprovedClaims = createAction(
   '[Claims] Load Approved Claims'
 );
+
+export const showAddClaimForm = createAction('[Claim] Show Add Claim Form');
+export const hideAddClaimForm = createAction('[Claim] Hide Add Claim Form');
