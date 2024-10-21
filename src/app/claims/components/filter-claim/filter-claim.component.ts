@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 
 
 import { applyFiltersOnPending, loadClaims } from '../../store/actions/claim.actions';
-import { Claim } from '../../models/claim.model';
+import { Claim, ClaimFilter } from '../../models/claim.model';
 import { map, Observable, tap } from 'rxjs';
 import { selectClaims, selectFilter, selectFilteredClaims, selectPendingClaims, selectPendingFilteredClaims } from '../../store/selectors/claim.selectors';
 
@@ -18,29 +18,7 @@ import { selectClaims, selectFilter, selectFilteredClaims, selectPendingClaims, 
   styleUrl: './filter-claim.component.scss'
 })
 export class FilterClaimComponent implements OnInit {
-  filter = {
-    encId: null,
-    patientName: null,
-    status: "Pending",
-    claimDateFrom: null,
-    claimDateTo: null,
-    minAmount: null,
-    maxAmount: null,
-    visitType: null,
-    department: null,
-    region: null,
-    doctor: null,
-    plan:null,
-    modifiedMr: null,
-    billStatus : null,
-    claimStatus : null,
-    clinic: null,
-    tapIns: null,
-    assignedTo: null,
-    tpaIns:null,
-    assignedToMe:null
-  }; 
-
+  filter!:ClaimFilter;
   claims$: Observable<Claim[]>;
   departments$!: Observable<string[]>;
   regions$!: Observable<string[]>;
@@ -55,8 +33,10 @@ export class FilterClaimComponent implements OnInit {
   billStatusOptions = ['Billed', 'UnBilled'];
 
   constructor(private store: Store) {
-    // this.claims$ = this.store.select(selectClaims);
     this.claims$ = this.store.select(selectPendingClaims);
+    this.store.select(selectFilter).subscribe((state) => {
+      this.filter = { ...state };
+    });
     
   }
 
@@ -64,7 +44,6 @@ export class FilterClaimComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(loadClaims());
 
-    // Load unique departments dynamically
     this.departments$ = this.claims$.pipe(
       map((claims: any[]) => Array.from(new Set(claims.map(claim => claim.department))))
     );

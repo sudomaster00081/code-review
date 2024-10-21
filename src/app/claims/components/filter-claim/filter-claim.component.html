@@ -129,13 +129,6 @@
               (ngModelChange)="updateFilter('modifiedMr', $event)"
               name="modifiedMr">
        
-  
-
-  
-
-
-  
-
   <label>Bill Status :</label>
   <select  [ngModel]="filter.billStatus"  name="billStatus" (ngModelChange)="updateFilter('billStatus', $event)">
 <option *ngFor="let billStatus of billStatusOptions" [value] = "billStatus"> {{billStatus}}</option>

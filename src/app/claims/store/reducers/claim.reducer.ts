@@ -83,13 +83,20 @@ export const claimReducer = createReducer(
 
 
   on(applyFiltersOnPending, (state, { filter }) => {
-    const filteredClaims = state.allClaims.filter((claim: Claim) => matchesFilters(claim, filter));
-    return {
-      ...state,
-      filters: filter,
-      filteredClaimsPending: filteredClaims, // Update filtered claims based on claim status = pending
+    // Set filter status to pending
+    const updatedFilter = {
+        ...filter,
+        status: 'Pending', // Set the status to 'pending'
     };
-  }),
+
+    const filteredClaims = state.allClaims.filter((claim: Claim) => matchesFilters(claim, updatedFilter));
+
+    return {
+        ...state,
+        filters: updatedFilter, // Update the filters with the new status
+        filteredClaimsPending: filteredClaims, // Update filtered claims based on claim status = pending
+    };
+}),
 
   on(loadApprovedClaims, (state) => {
     const filteredClaimsReviewed = filtersOnReview(state.allClaims, state.filters);
