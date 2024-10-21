@@ -33,7 +33,7 @@ export class FilterClaimComponent implements OnInit {
   billStatusOptions = ['Billed', 'UnBilled'];
 
   constructor(private store: Store) {
-    this.claims$ = this.store.select(selectPendingClaims);
+    this.claims$ = this.store.select(selectClaims);
     this.store.select(selectFilter).subscribe((state) => {
       this.filter = { ...state };
     });
@@ -75,12 +75,10 @@ export class FilterClaimComponent implements OnInit {
   }
 
   applyFilters() {
-    // console.log('Applying filters:', this.filter);
     this.store.dispatch(applyFiltersOnPending({ filter: this.filter }));
   }
 
   ngOnDestroy(): void {
-    // unsubscribe from departments
     this.departments$.subscribe().unsubscribe();
   }
 }
