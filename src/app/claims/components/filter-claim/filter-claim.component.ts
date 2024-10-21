@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 
-import { applyFilters, applyFiltersOnPending, loadClaims } from '../../store/actions/claim.actions';
+import { applyFiltersOnPending, loadClaims } from '../../store/actions/claim.actions';
 import { Claim } from '../../models/claim.model';
 import { map, Observable, tap } from 'rxjs';
 import { selectClaims, selectFilter, selectFilteredClaims, selectPendingClaims, selectPendingFilteredClaims } from '../../store/selectors/claim.selectors';
@@ -62,6 +62,8 @@ export class FilterClaimComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.store.dispatch(loadClaims());
+
     // Load unique departments dynamically
     this.departments$ = this.claims$.pipe(
       map((claims: any[]) => Array.from(new Set(claims.map(claim => claim.department))))

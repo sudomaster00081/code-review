@@ -31,12 +31,7 @@ export const selectFilteredClaims = createSelector(
 );
 
 
-export const selectApprovedClaims = createSelector(
-  selectClaimState,
-  (state: ClaimState) => {
-    return state.filteredClaimsReviewed;
-  }
-);
+
 
 export const selectPendingClaims = createSelector(
   selectClaimState,
@@ -49,6 +44,13 @@ export const selectPendingClaims = createSelector(
 export const selectPendingFilteredClaims = createSelector(
   selectClaimState,
   (state: ClaimState) => {
-    return state.filteredClaimsPending
+    return state.filteredClaimsPending;
+  }
+);
+
+export const selectApprovedClaims = createSelector(
+  selectClaimState,
+  (state: ClaimState) => {
+    return state.filteredClaimsReviewed;
   }
 );

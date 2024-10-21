@@ -1,6 +1,6 @@
 // claim.actions.ts
 import { createAction, props } from '@ngrx/store';
-import { Claim } from '../../models/claim.model';
+import { Claim, ClaimFilter } from '../../models/claim.model';
 
 export const loadClaims = createAction('[Claims claim components] Load Claims');
 
@@ -59,10 +59,6 @@ export const addClaimFailure = createAction(
   props<{ error: string }>()
 );
 
-export const applyFilters = createAction(
-  '[Claims] Apply Filters',
-  props<{ filter: any }>() // Filter object contains the filtering fields
-);
 
 export const applyFiltersOnPending = createAction(
   '[Claims] Apply Filters On Pending',

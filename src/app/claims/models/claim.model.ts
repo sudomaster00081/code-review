@@ -28,9 +28,9 @@ export interface Claim {
   }
 
 export interface ClaimFilter {
-    encId: null,
+    encId: null|number,
     patientName: null,
-    status: null,
+    status: null|string,
     claimDateFrom: null,
     claimDateTo: null,
     minAmount: null,

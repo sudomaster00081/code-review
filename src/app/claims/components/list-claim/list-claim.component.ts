@@ -42,7 +42,7 @@ export class ListClaimComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(loadClaims());
+    
   }
 
   updateClaim(claim: Claim) {

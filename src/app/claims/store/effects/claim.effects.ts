@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { ClaimsService } from '../../services/claims.service';
 import {
   loadClaims,
@@ -17,6 +17,7 @@ import {
   addClaim,
   addClaimSuccess,
   addClaimFailure,
+  loadApprovedClaims,
 } from '../actions/claim.actions';
 
 @Injectable()
@@ -72,4 +73,16 @@ export class ClaimEffects {
       )
     )
   );
+
+
+  loadApprovedClaims$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loadClaimsSuccess),
+      switchMap(() => {
+        // Dispatch loadApprovedClaims after successful claims loading
+        return of(loadApprovedClaims());
+      })
+    )
+  );
 }
+

@@ -3,6 +3,8 @@ import { Component, OnDestroy } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Claim } from '../../models/claim.model';
 import { FormsModule } from '@angular/forms';
+import { addClaim, updateClaim } from '../../store/actions/claim.actions';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-add-claim',
@@ -39,10 +41,15 @@ export class AddClaimModalComponent {
     claimStatus : 'Pending', 
   };
 
-  constructor(public dialogRef: MatDialogRef<AddClaimModalComponent>) {}
+  constructor(
+    public dialogRef: MatDialogRef<AddClaimModalComponent>,
+    private store: Store
+  ) {}
 
   saveClaim() {
-    this.dialogRef.close(this.claim); // Pass the new claim object back to parent
+    this.claim.id = Math.floor(Math.random() * 1000) + 1;
+    this.store.dispatch(addClaim({ claim: this.claim }));
+    this.closeModal()
   }
 
   closeModal() {

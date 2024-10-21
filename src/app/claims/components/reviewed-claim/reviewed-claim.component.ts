@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Claim } from '../../models/claim.model';
 import { selectApprovedClaims, selectClaims, selectError, selectFilteredClaims, selectLoading } from '../../store/selectors/claim.selectors';
-import { updateClaim } from '../../store/actions/claim.actions';
+import { loadApprovedClaims, updateClaim } from '../../store/actions/claim.actions';
 
 
 @Component({
@@ -15,7 +15,7 @@ import { updateClaim } from '../../store/actions/claim.actions';
   templateUrl: './reviewed-claim.component.html',
   styleUrl: './reviewed-claim.component.scss'
 })
-export class ReviewedClaimComponent {
+export class ReviewedClaimComponent implements OnInit {
   claims$: Observable<Claim[]>;
   loading$: Observable<boolean>;
   error$: Observable<string | null>;
@@ -28,7 +28,12 @@ export class ReviewedClaimComponent {
     this.loading$ = this.store.select(selectLoading);
     this.error$ = this.store.select(selectError);
     
+    
 
+  }
+  ngOnInit(): void {
+    // throw new Error('Method not implemented.');
+    this.store.dispatch(loadApprovedClaims());
   }
 
   loadMore() {
